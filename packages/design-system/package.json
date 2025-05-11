@@ -1,5 +1,5 @@
 {
-  "name": "@workspace/ui",
+  "name": "@workspace/design-system",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -38,8 +38,9 @@
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
+    "./ui/*": "./src/ui/*.tsx",
     "./hooks/*": "./src/hooks/*.ts",
     "./prettier.config": "./prettier.config.mjs",
-    "./icons/*": "./src/icons/*.tsx"
+    "./icons": "./src/icons/index.tsx"
   }
 }

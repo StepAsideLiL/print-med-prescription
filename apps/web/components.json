@@ -14,7 +14,7 @@
     "components": "@/src/components",
     "hooks": "@/src/hooks",
     "lib": "@/src/lib",
-    "utils": "@workspace/ui/lib/utils",
-    "ui": "@workspace/ui/components"
+    "utils": "@workspace/design-system/lib/utils",
+    "ui": "@workspace/design-system/ui"
   }
 }

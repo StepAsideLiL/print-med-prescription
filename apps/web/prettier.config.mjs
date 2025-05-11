@@ -1,1 +1,1 @@
-export { default } from "@workspace/ui/prettier.config";
+export { default } from "@workspace/design-system/prettier.config";
