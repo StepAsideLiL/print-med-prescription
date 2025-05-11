@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
+    "@remixicon/react": "^4.6.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
@@ -38,6 +39,7 @@
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*.ts",
-    "./prettier.config": "./prettier.config.mjs"
+    "./prettier.config": "./prettier.config.mjs",
+    "./icons/*": "./src/icons/*.tsx"
   }
 }
