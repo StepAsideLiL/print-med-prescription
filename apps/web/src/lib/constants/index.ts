@@ -1,4 +1,6 @@
-export const pageSizes = [
+import { TPageSize } from "@/lib/types";
+
+export const pageSizes: TPageSize[] = [
   {
     id: "letter",
     title: "Letter",
