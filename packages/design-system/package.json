@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.2.4",
     "@radix-ui/react-slot": "^1.1.2",
     "@remixicon/react": "^4.6.0",
     "class-variance-authority": "^0.7.1",
