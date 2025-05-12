@@ -1,4 +1,4 @@
-import { TPageSize } from "@/lib/types";
+import { TPageLebel, TPageSize } from "@/lib/types";
 
 export const pageSizes: TPageSize[] = [
   {
@@ -68,6 +68,14 @@ export const pageSizes: TPageSize[] = [
     height: 1420,
   },
 ];
+
+export const pageSizesMap = pageSizes.reduce(
+  (acc, item) => {
+    acc[item.id] = item;
+    return acc;
+  },
+  {} as Record<TPageLebel, TPageSize>
+);
 
 // | Name          | Inches (W × H) | Pixels (W × H) @96 PPI | Aspect Ratio (W\:H) |
 // | ------------- | -------------- | ---------------------- | ------------------- |

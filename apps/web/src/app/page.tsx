@@ -1,12 +1,18 @@
-import { Button } from "@workspace/ui/components/button";
+import PagePreview from "@/components/PagePreview";
+import SelectPageSize from "@/components/SelectPageSize";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Print Med Prescription",
+  description: "Print Med Prescription",
+};
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
-    </div>
+    <main className="mx-auto w-full max-w-5xl space-y-2 px-5 py-5 md:px-0">
+      <SelectPageSize />
+
+      <PagePreview />
+    </main>
   );
 }
