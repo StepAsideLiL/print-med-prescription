@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fonts.GeistSans.variable} ${fonts.GeistSans.variable} font-sans antialiased`}
+        className={`${fonts.GeistSans.variable} ${fonts.GeistSans.variable} bg-muted font-sans antialiased`}
       >
         <header className="border-b py-5">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 md:px-0">
