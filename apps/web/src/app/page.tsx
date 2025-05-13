@@ -1,5 +1,5 @@
 import AddMedicine from "@/components/AddMedicine";
-import MedList from "@/components/MedList";
+import MedicineList from "@/components/MedicineList";
 import PagePreview from "@/components/PagePreview";
 import SelectPageSize from "@/components/SelectPageSize";
 import { Metadata } from "next";
@@ -15,7 +15,7 @@ export default function Page() {
       <SelectPageSize />
 
       <PagePreview>
-        <MedList />
+        <MedicineList />
         <AddMedicine />
       </PagePreview>
     </main>
