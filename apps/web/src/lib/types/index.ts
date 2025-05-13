@@ -17,3 +17,18 @@ export type TPageSize = {
   width: number;
   height: number;
 };
+
+export type TMedDuration = {
+  lenght: number;
+  unit: "day" | "week" | "month";
+};
+
+export type TMedListSchema = {
+  id: string;
+  medicineName: string;
+  moring: boolean;
+  noon: boolean;
+  night: boolean;
+  afterMeal: boolean;
+  duration: TMedDuration;
+};
