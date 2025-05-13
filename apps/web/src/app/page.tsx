@@ -1,3 +1,5 @@
+import AddMedicine from "@/components/AddMedicine";
+import MedList from "@/components/MedList";
 import PagePreview from "@/components/PagePreview";
 import SelectPageSize from "@/components/SelectPageSize";
 import { Metadata } from "next";
@@ -12,7 +14,10 @@ export default function Page() {
     <main className="mx-auto w-full max-w-5xl space-y-2 px-5 py-5 md:px-0">
       <SelectPageSize />
 
-      <PagePreview />
+      <PagePreview>
+        <MedList />
+        <AddMedicine />
+      </PagePreview>
     </main>
   );
 }

@@ -3,7 +3,7 @@
 import { newMed, store } from "@/lib/store";
 import { Button } from "@workspace/design-system/ui/button";
 
-export default function AddMed() {
+export default function AddMedicine() {
   const { get, set } = store.MedList();
 
   return (
