@@ -3,7 +3,11 @@
 import { pageSizesMap } from "@/lib/constants";
 import { store } from "@/lib/store";
 
-export default function PagePreview() {
+export default function PagePreview({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
   const { get } = store.CurrentPageSize();
 
   const style: React.CSSProperties = {
@@ -11,5 +15,9 @@ export default function PagePreview() {
     height: `${pageSizesMap[get].height}px`,
   };
 
-  return <div className="bg-background mx-auto border" style={style}></div>;
+  return (
+    <div className="bg-background mx-auto border p-5" style={style}>
+      {children}
+    </div>
+  );
 }
