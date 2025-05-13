@@ -25,6 +25,7 @@ export type TMedDuration = {
 
 export type TMedListSchema = {
   id: string;
+  type: "tablet" | "syrup";
   medicineName: string;
   moring: boolean;
   noon: boolean;
