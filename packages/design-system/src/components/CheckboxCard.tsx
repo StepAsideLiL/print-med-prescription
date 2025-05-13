@@ -1,5 +1,5 @@
-import { Checkbox } from "@/ui/checkbox";
-import { Label } from "@/ui/label";
+import { Checkbox } from "@workspace/design-system/ui/checkbox";
+import { Label } from "@workspace/design-system/ui/label";
 import { useId } from "react";
 
 export default function CheckboxCard({
