@@ -25,12 +25,12 @@ export function newMed(): TMedListSchema {
 }
 
 const medicineListAtom = atom<TMedListSchema[]>([]);
-function MedList() {
+function MedicineList() {
   const [get, set] = useAtom(medicineListAtom);
   return { get, set };
 }
 
 export const store = {
   CurrentPageSize,
-  MedList,
+  MedicineList,
 };

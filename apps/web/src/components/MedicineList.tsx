@@ -22,7 +22,7 @@ import { Checkbox } from "@workspace/design-system/ui/checkbox";
 import { Label } from "@workspace/design-system/ui/label";
 
 export default function MedicineList() {
-  const { get: medList } = store.MedList();
+  const { get: medicineList } = store.MedicineList();
 
   return (
     <Table className="text-xs">
@@ -39,9 +39,9 @@ export default function MedicineList() {
         </TableRow>
       </TableHeader>
 
-      {medList.length === 0 ? null : (
+      {medicineList.length === 0 ? null : (
         <TableBody>
-          {medList.map((med) => (
+          {medicineList.map((med) => (
             <TableRow key={med.id}>
               <TableCell className="px-1">
                 <UpdateMedicineType med={med} />
