@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai";
-import { TMedListSchema, TPageLebel } from "@/lib/types";
+import { TMedicineType, TMedListSchema, TPageLebel } from "@/lib/types";
 import { nanoId } from "../nanoid";
 
 const currentPageSizeIdAtom = atom<TPageLebel>("a4");
@@ -30,7 +30,24 @@ function MedicineList() {
   return { get, set };
 }
 
+const updateMedicineAtom = atom(
+  null,
+  (get, set, newMedicine: TMedListSchema) => {
+    set(
+      medicineListAtom,
+      get(medicineListAtom).map((med) =>
+        med.id === newMedicine.id ? newMedicine : med
+      )
+    );
+  }
+);
+function UpdateMedicine() {
+  const [_, set] = useAtom(updateMedicineAtom);
+  return { set };
+}
+
 export const store = {
   CurrentPageSize,
   MedicineList,
+  UpdateMedicine,
 };
