@@ -18,18 +18,20 @@ export type TPageSize = {
   height: number;
 };
 
-export type TMedDuration = {
+export type TMedicineType = "tablet" | "syrup";
+
+export type TMedicationDuration = {
   lenght: number;
   unit: "day" | "week" | "month";
 };
 
 export type TMedListSchema = {
   id: string;
-  type: "tablet" | "syrup";
+  type: TMedicineType;
   medicineName: string;
   moring: boolean;
   noon: boolean;
   night: boolean;
   afterMeal: boolean;
-  duration: TMedDuration;
+  duration: TMedicationDuration;
 };
