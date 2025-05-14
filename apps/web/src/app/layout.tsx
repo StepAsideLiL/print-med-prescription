@@ -1,6 +1,7 @@
 import fonts from "@/lib/fonts";
 import Logo from "@workspace/design-system/components/Logo";
 import "@workspace/design-system/globals.css";
+import "./style.css";
 import { Icons } from "@workspace/design-system/icons";
 import Link from "next/link";
 
