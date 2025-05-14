@@ -11,6 +11,7 @@ function CurrentPageSize() {
 export function newMed(): TMedListSchema {
   return {
     id: nanoId.medId(),
+    type: "tablet",
     medicineName: "",
     moring: true,
     noon: true,
@@ -23,9 +24,9 @@ export function newMed(): TMedListSchema {
   };
 }
 
-const medListAtom = atom<TMedListSchema[]>([]);
+const medicineListAtom = atom<TMedListSchema[]>([]);
 function MedList() {
-  const [get, set] = useAtom(medListAtom);
+  const [get, set] = useAtom(medicineListAtom);
   return { get, set };
 }
 
