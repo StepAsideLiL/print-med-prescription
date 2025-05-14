@@ -29,7 +29,7 @@ export type TMedListSchema = {
   id: string;
   type: TMedicineType;
   medicineName: string;
-  moring: boolean;
+  morning: boolean;
   noon: boolean;
   night: boolean;
   afterMeal: boolean;

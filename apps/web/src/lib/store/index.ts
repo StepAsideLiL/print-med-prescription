@@ -13,7 +13,7 @@ export function newMed(): TMedListSchema {
     id: nanoId.medId(),
     type: "tablet",
     medicineName: "",
-    moring: true,
+    morning: true,
     noon: true,
     night: true,
     afterMeal: true,

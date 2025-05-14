@@ -27,7 +27,6 @@ import { Label } from "@workspace/design-system/ui/label";
 
 export default function MedicineList() {
   const { get: medicineList } = store.MedicineList();
-  console.log(medicineList);
 
   return (
     <Table className="text-xs">
@@ -130,7 +129,7 @@ function UpdateMedicineMorning({ med }: { med: TMedListSchema }) {
   const { set } = store.UpdateMedicine();
 
   function handleChange(value: boolean) {
-    set({ ...med, moring: value });
+    set({ ...med, morning: value });
   }
 
   return (
@@ -139,12 +138,12 @@ function UpdateMedicineMorning({ med }: { med: TMedListSchema }) {
         id={med.id}
         className="cursor-pointer after:absolute after:inset-0"
         aria-describedby={`${med.id}-description`}
-        checked={med.moring}
+        checked={med.morning}
         onCheckedChange={(value: boolean) => handleChange(value)}
       />
 
       <Label htmlFor={med.id} className="text-xs">
-        {med.moring ? "1" : "0"}
+        {med.morning ? "1" : "0"}
       </Label>
     </div>
   );
