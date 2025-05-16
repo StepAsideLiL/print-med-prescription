@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:workers": "tsc -p tsconfig.worker.json",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
