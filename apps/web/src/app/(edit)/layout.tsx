@@ -1,4 +1,5 @@
 import Logo from "@workspace/design-system/components/Logo";
+import Link from "next/link";
 
 export default function Layout({
   children,
@@ -8,7 +9,9 @@ export default function Layout({
   return (
     <>
       <header className="border-b py-3">
-        <Logo />
+        <Link href={"/"}>
+          <Logo />
+        </Link>
       </header>
 
       {children}
