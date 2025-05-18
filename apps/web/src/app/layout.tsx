@@ -16,17 +16,27 @@ export default function RootLayout({
         className={`${fonts.GeistSans.variable} ${fonts.GeistSans.variable} bg-muted font-sans antialiased`}
       >
         <header className="border-b py-5">
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 md:px-0">
-            <Link href={"/"} className="inline-block">
-              <Logo />
-            </Link>
+          <nav className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 md:px-0">
+            <div className="flex items-center gap-5">
+              <Link href={"/"} className="inline-block">
+                <Logo />
+              </Link>
+
+              <Link href={"/new-prescription"} className="hover:underline">
+                New Prescription
+              </Link>
+
+              <Link href={"/create-template"} className="hover:underline">
+                Create Template
+              </Link>
+            </div>
 
             <div>
               <Link href="https://github.com/StepAsideLiL/print-med-prescription">
                 <Icons.Github size={40} />
               </Link>
             </div>
-          </div>
+          </nav>
         </header>
 
         {children}
