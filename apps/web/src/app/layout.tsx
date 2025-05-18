@@ -1,6 +1,15 @@
 import fonts from "@/lib/fonts";
 import "@workspace/design-system/globals.css";
 import "./style.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s - Print Med Prescription",
+    default: "Print Med Prescription",
+  },
+  description: "Print Med Prescription",
+};
 
 export default function RootLayout({
   children,
