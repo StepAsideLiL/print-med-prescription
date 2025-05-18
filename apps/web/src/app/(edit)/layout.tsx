@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <header className="border-b py-5">
+      <header className="border-b py-3">
         <Logo />
       </header>
 
