@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create Template",
+  title: "Create Prescription Template",
 };
 
 export default function Page() {
