@@ -1,12 +1,14 @@
 import { atom, useAtom } from "jotai";
-import { TMedicineType, TMedListSchema, TPageLebel } from "@/lib/types";
+import { TMedListSchema, TPageLebel } from "@/lib/types";
 import { nanoId } from "../nanoid";
 
+// Current Page Size Related Atoms Start
 const currentPageSizeIdAtom = atom<TPageLebel>("a4");
 function CurrentPageSize() {
   const [get, set] = useAtom(currentPageSizeIdAtom);
   return { get, set };
 }
+// Current Page Size Related Atoms End
 
 export function newMed(): TMedListSchema {
   return {
@@ -24,6 +26,7 @@ export function newMed(): TMedListSchema {
   };
 }
 
+// Medicine List Related Atoms Start
 const medicineListAtom = atom<TMedListSchema[]>([]);
 function MedicineList() {
   const [get, set] = useAtom(medicineListAtom);
@@ -56,6 +59,7 @@ function DeleteMedicine() {
   const [_, set] = useAtom(deleteMedicineAtom);
   return { delete: set };
 }
+// Medicine List Related Atoms End
 
 export const store = {
   CurrentPageSize,
