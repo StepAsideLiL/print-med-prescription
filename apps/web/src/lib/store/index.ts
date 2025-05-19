@@ -46,8 +46,20 @@ function UpdateMedicine() {
   return { update: set };
 }
 
+const deleteMedicineAtom = atom(null, (get, set, medicineId: string) => {
+  set(
+    medicineListAtom,
+    get(medicineListAtom).filter((med) => med.id !== medicineId)
+  );
+});
+function DeleteMedicine() {
+  const [_, set] = useAtom(deleteMedicineAtom);
+  return { delete: set };
+}
+
 export const store = {
   CurrentPageSize,
   MedicineList,
   UpdateMedicine,
+  DeleteMedicine,
 };
