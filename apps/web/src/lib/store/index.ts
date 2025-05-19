@@ -43,7 +43,7 @@ const updateMedicineAtom = atom(
 );
 function UpdateMedicine() {
   const [_, set] = useAtom(updateMedicineAtom);
-  return { set };
+  return { update: set };
 }
 
 export const store = {

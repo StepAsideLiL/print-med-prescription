@@ -80,13 +80,13 @@ export default function MedicineList() {
 }
 
 function UpdateMedicineType({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   return (
     <Select
       value={med.type}
       onValueChange={(value: TMedicineType) =>
-        set({
+        update({
           ...med,
           type: value,
         })
@@ -109,10 +109,10 @@ function UpdateMedicineType({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineName({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange(value: string) {
-    set({ ...med, medicineName: value });
+    update({ ...med, medicineName: value });
   }
 
   return (
@@ -126,10 +126,10 @@ function UpdateMedicineName({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineMorning({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange(value: boolean) {
-    set({ ...med, morning: value });
+    update({ ...med, morning: value });
   }
 
   return (
@@ -150,10 +150,10 @@ function UpdateMedicineMorning({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineNoon({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange(value: boolean) {
-    set({ ...med, noon: value });
+    update({ ...med, noon: value });
   }
 
   return (
@@ -174,10 +174,10 @@ function UpdateMedicineNoon({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineNight({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange(value: boolean) {
-    set({ ...med, night: value });
+    update({ ...med, night: value });
   }
 
   return (
@@ -198,10 +198,10 @@ function UpdateMedicineNight({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineBeforeMeal({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange() {
-    set({ ...med, afterMeal: false });
+    update({ ...med, afterMeal: false });
   }
 
   return (
@@ -222,10 +222,10 @@ function UpdateMedicineBeforeMeal({ med }: { med: TMedListSchema }) {
 }
 
 function UpdateMedicineAfterMeal({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleChange() {
-    set({ ...med, afterMeal: true });
+    update({ ...med, afterMeal: true });
   }
 
   return (
@@ -250,14 +250,11 @@ const durationList = [
   { id: "week", title: "Week" },
   { id: "month", title: "Month" },
 ];
-const durationListMap = new Map<string, string>(
-  durationList.map((duration) => [duration.id, duration.title])
-);
 function UpdateMedicineDuration({ med }: { med: TMedListSchema }) {
-  const { set } = store.UpdateMedicine();
+  const { update } = store.UpdateMedicine();
 
   function handleDurationLengthChange(value: string) {
-    set({
+    update({
       ...med,
       duration: {
         lenght: parseInt(value),
@@ -267,7 +264,7 @@ function UpdateMedicineDuration({ med }: { med: TMedListSchema }) {
   }
 
   function handleDurationUnitChange(value: TMedicationDuration["unit"]) {
-    set({
+    update({
       ...med,
       duration: {
         lenght: med.duration.lenght,
