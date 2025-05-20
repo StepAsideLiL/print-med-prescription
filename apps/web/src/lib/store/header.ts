@@ -103,3 +103,42 @@ export function AddHeaderImage() {
   const [_, set] = useAtom(addHeaderImageAtom);
   return { addHeaderImage: set };
 }
+
+const updateHeaderTextAtom = atom(null, (get, set, section: THeaderSection) => {
+  set(
+    headerSectionAtom,
+    get(headerSectionAtom).map((s) =>
+      s.id === section.id
+        ? {
+            ...section,
+            content: section.content,
+          }
+        : s
+    )
+  );
+});
+export function UpdateHeaderText() {
+  const [_, set] = useAtom(updateHeaderTextAtom);
+  return { updateHeaderText: set };
+}
+
+const updateHeaderImageAtom = atom(
+  null,
+  (get, set, section: THeaderSection) => {
+    set(
+      headerSectionAtom,
+      get(headerSectionAtom).map((s) =>
+        s.id === section.id
+          ? {
+              ...section,
+              content: section.content,
+            }
+          : s
+      )
+    );
+  }
+);
+export function UpdateHeaderImage() {
+  const [_, set] = useAtom(updateHeaderImageAtom);
+  return { updateHeaderImage: set };
+}
