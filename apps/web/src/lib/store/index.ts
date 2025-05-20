@@ -1,8 +1,8 @@
-import { CurrentPageSize } from "./page-size";
-import { DeleteMedicine, MedicineList, UpdateMedicine } from "./med-list";
+import * as PageSize from "./page-size";
+import * as Medicine from "./med-list";
 import { TMedListSchema } from "@/lib/types";
 import { nanoId } from "@/lib/nanoid";
-import { AddHeaderImage, AddHeaderText, HeaderSection } from "./header";
+import * as Header from "./header";
 
 export function newMed(): TMedListSchema {
   return {
@@ -21,11 +21,7 @@ export function newMed(): TMedListSchema {
 }
 
 export const store = {
-  CurrentPageSize,
-  MedicineList,
-  UpdateMedicine,
-  DeleteMedicine,
-  HeaderSection,
-  AddHeaderText,
-  AddHeaderImage,
+  ...PageSize,
+  ...Medicine,
+  ...Header,
 };
