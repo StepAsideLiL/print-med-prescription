@@ -38,19 +38,11 @@ export default function TemplateHeaderSection() {
     <div className="flex items-center gap-2">
       {get.map((section) => {
         if (section.contentType === "text" && section.content !== null) {
-          return (
-            <div key={section.id} style={section.style} className="border">
-              <TextEditor content={section.content} />
-            </div>
-          );
+          return <TextEditor key={section.id} section={section} />;
         }
 
         if (section.contentType === "img" && section.content !== null) {
-          return (
-            <div key={section.id} style={section.style} className="border">
-              <ImageEditor content={section.content} />
-            </div>
-          );
+          return <ImageEditor key={section.id} section={section} />;
         }
 
         return (

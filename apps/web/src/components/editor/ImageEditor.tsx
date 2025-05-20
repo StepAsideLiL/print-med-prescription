@@ -1,18 +1,18 @@
 "use client";
 
+import { THeaderSection } from "@/lib/types";
 import {
   Document,
   EditorContent,
   Image,
-  JSONContent,
   Text,
   useEditor,
 } from "@workspace/editor";
 
-export default function ImageEditor({ content }: { content: JSONContent }) {
+export default function ImageEditor({ section }: { section: THeaderSection }) {
   const editor = useEditor({
     extensions: [Document, Text, Image],
-    content: content,
+    content: section.content,
     onUpdate: ({ editor }) => {
       console.log(editor.getJSON());
     },
@@ -21,5 +21,9 @@ export default function ImageEditor({ content }: { content: JSONContent }) {
     },
   });
 
-  return <EditorContent editor={editor} />;
+  return (
+    <div style={section.style}>
+      <EditorContent editor={editor} />
+    </div>
+  );
 }

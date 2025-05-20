@@ -1,23 +1,27 @@
 "use client";
 
+import { THeaderSection } from "@/lib/types";
 import {
   Document,
   EditorContent,
   Heading,
-  JSONContent,
   Paragraph,
   Text,
   useEditor,
 } from "@workspace/editor";
 
-export default function TextEditor({ content }: { content: JSONContent }) {
+export default function TextEditor({ section }: { section: THeaderSection }) {
   const editor = useEditor({
     extensions: [Document, Text, Paragraph, Heading],
-    content: content,
+    content: section.content,
     onUpdate: ({ editor }) => {
       console.log(editor.getJSON());
     },
   });
 
-  return <EditorContent editor={editor} />;
+  return (
+    <div style={section.style}>
+      <EditorContent editor={editor} />
+    </div>
+  );
 }
