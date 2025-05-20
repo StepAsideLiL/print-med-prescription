@@ -1,3 +1,5 @@
+import { JSONContent } from "@workspace/editor";
+
 export type TPageLebel =
   | "letter"
   | "tabloid"
@@ -34,4 +36,13 @@ export type TMedListSchema = {
   night: boolean;
   afterMeal: boolean;
   duration: TMedicationDuration;
+};
+
+export type THeaderSection = {
+  id: string;
+  style: {
+    width: string;
+  };
+  contentType: "text" | "img" | null;
+  content: JSONContent | null;
 };
