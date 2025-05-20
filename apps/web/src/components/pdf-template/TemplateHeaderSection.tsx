@@ -35,7 +35,7 @@ export default function TemplateHeaderSection() {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-start gap-2">
       {get.map((section) => {
         if (section.contentType === "text" && section.content !== null) {
           return <TextEditor key={section.id} section={section} />;
