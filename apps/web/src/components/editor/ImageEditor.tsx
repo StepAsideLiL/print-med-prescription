@@ -16,7 +16,7 @@ export default function ImageEditor({ section }: { section: THeaderSection }) {
   const { updateHeaderImage } = store.UpdateHeaderImage();
 
   const editor = useEditor({
-    extensions: [Document, Text, Image],
+    extensions: [Document.Document, Text.Text, Image.Image],
     content: section.content,
   });
 

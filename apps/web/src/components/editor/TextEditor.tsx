@@ -4,11 +4,16 @@ import { store } from "@/lib/store";
 import { THeaderSection } from "@/lib/types";
 import { Button } from "@workspace/design-system/ui/button";
 import {
+  Bold,
+  Color,
   Document,
   EditorContent,
   Heading,
+  Italic,
   Paragraph,
   Text,
+  TextStyle,
+  Underline,
   useEditor,
 } from "@workspace/editor";
 import React from "react";
@@ -17,7 +22,17 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
   const { updateHeaderText } = store.UpdateHeaderText();
 
   const editor = useEditor({
-    extensions: [Document, Text, Paragraph, Heading],
+    extensions: [
+      Document.Document,
+      Text.Text,
+      Paragraph.Paragraph,
+      Heading.Heading,
+      Bold.Bold,
+      Italic.Italic,
+      Underline.Underline,
+      Color.Color,
+      TextStyle.TextStyle,
+    ],
     content: section.content,
   });
 
