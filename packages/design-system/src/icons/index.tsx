@@ -1,5 +1,5 @@
 import * as R from "@remixicon/react";
 
-export const Icons = {
+export default {
   Github: R.RiGithubFill,
-};
+} as const;
