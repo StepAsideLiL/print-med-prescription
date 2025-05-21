@@ -13,7 +13,7 @@ export default function TemplateHeaderSection() {
 
   if (get.length === 0) {
     return (
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex min-h-28 items-center justify-center gap-2">
         {["1", "2", "3"].map((col) => (
           <Button
             key={col}
@@ -49,7 +49,7 @@ export default function TemplateHeaderSection() {
           <div
             key={section.id}
             style={section.style}
-            className="flex flex-col items-center justify-center gap-1 border py-5"
+            className="flex min-h-28 flex-col items-center justify-center gap-1 border"
           >
             <Button
               variant={"outline"}

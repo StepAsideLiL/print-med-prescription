@@ -2,6 +2,7 @@
 
 import { store } from "@/lib/store";
 import { THeaderSection } from "@/lib/types";
+import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
 import {
   Document,
@@ -14,10 +15,16 @@ import React from "react";
 
 export default function ImageEditor({ section }: { section: THeaderSection }) {
   const { updateHeaderImage } = store.UpdateHeaderImage();
+  const { get, set } = store.SelectSection();
 
   const editor = useEditor({
     extensions: [Document.Document, Text.Text, Image.Image],
     content: section.content,
+    editorProps: {
+      attributes: {
+        class: "min-h-28 p-1 border-none focus-visible:outline-none",
+      },
+    },
   });
 
   if (editor === null) {
@@ -25,8 +32,18 @@ export default function ImageEditor({ section }: { section: THeaderSection }) {
   }
 
   return (
-    <div style={section.style} className="relative">
-      <div className="bg-mute absolute -top-10 w-full rounded border p-1">
+    <div
+      style={section.style}
+      className={cn(
+        "relative border",
+        get === section.id && "border-muted-foreground"
+      )}
+      onClick={(event) => {
+        event.stopPropagation();
+        set(section.id);
+      }}
+    >
+      <div className="bg-muted absolute -top-14 w-full rounded border p-1">
         <Button
           variant={"secondary"}
           size={"sm"}

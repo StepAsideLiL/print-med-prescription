@@ -41,6 +41,12 @@ export function HeaderSection() {
   return { get, set };
 }
 
+const selectSectionAtom = atom<string | null>(null);
+export function SelectSection() {
+  const [get, set] = useAtom(selectSectionAtom);
+  return { get, set };
+}
+
 const addHeaderTextAtom = atom(null, (get, set, section: THeaderSection) => {
   set(
     headerSectionAtom,
