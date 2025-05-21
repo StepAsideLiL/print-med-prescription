@@ -35,7 +35,11 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
           class: "text-xl",
         },
       }),
-      Paragraph.Paragraph,
+      Paragraph.Paragraph.configure({
+        HTMLAttributes: {
+          class: "text-xs",
+        },
+      }),
       Bold.Bold.configure({
         HTMLAttributes: {
           class: "font-semibold",
