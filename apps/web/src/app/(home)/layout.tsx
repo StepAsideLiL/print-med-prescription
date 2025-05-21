@@ -1,5 +1,5 @@
 import Logo from "@workspace/design-system/components/Logo";
-import { Icons } from "@workspace/design-system/icons";
+import Icons from "@workspace/design-system/icons";
 import Link from "next/link";
 
 export default function Layout({
