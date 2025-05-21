@@ -18,7 +18,6 @@ import {
   Underline,
   useEditor,
 } from "@workspace/editor";
-import React from "react";
 
 export default function TextEditor({ section }: { section: THeaderSection }) {
   const { updateHeaderText } = store.UpdateHeaderText();
