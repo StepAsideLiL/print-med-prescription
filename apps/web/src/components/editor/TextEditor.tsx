@@ -23,6 +23,7 @@ import React from "react";
 export default function TextEditor({ section }: { section: THeaderSection }) {
   const { updateHeaderText } = store.UpdateHeaderText();
   const { get, set } = store.SelectSection();
+  const { removeHeaderSection } = store.RemoveHeaderSection();
 
   const editor = useEditor({
     extensions: [
@@ -78,10 +79,12 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
       }}
     >
       {get === section.id && (
-        <div className="bg-muted absolute -top-14 w-full rounded border">
-          <div className="flex items-center gap-1">
+        <div className="bg-muted absolute -top-14 w-fit rounded border">
+          <div className="flex items-center gap-1 p-1">
             <Button
-              variant={"outline"}
+              variant={
+                editor.isActive("heading", { level: 1 }) ? "default" : "outline"
+              }
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
@@ -92,7 +95,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
             </Button>
 
             <Button
-              variant={"outline"}
+              variant={editor.isActive("paragraph") ? "default" : "outline"}
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
@@ -103,7 +106,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
             </Button>
 
             <Button
-              variant={"outline"}
+              variant={editor.isActive("bold") ? "default" : "outline"}
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
@@ -114,7 +117,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
             </Button>
 
             <Button
-              variant={"outline"}
+              variant={editor.isActive("italic") ? "default" : "outline"}
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
@@ -125,7 +128,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
             </Button>
 
             <Button
-              variant={"outline"}
+              variant={editor.isActive("underline") ? "default" : "outline"}
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
@@ -133,6 +136,17 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               }}
             >
               <Icons.Underline />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                removeHeaderSection(section);
+              }}
+            >
+              <Icons.Delete />
             </Button>
 
             <Button

@@ -148,3 +148,21 @@ export function UpdateHeaderImage() {
   const [_, set] = useAtom(updateHeaderImageAtom);
   return { updateHeaderImage: set };
 }
+
+const removeHeaderSectionAtom = atom(
+  null,
+  (get, set, section: THeaderSection) => {
+    set(
+      headerSectionAtom,
+      get(headerSectionAtom).map((s) =>
+        s.id === section.id
+          ? { ...section, contentType: null, content: null }
+          : s
+      )
+    );
+  }
+);
+export function RemoveHeaderSection() {
+  const [_, set] = useAtom(removeHeaderSectionAtom);
+  return { removeHeaderSection: set };
+}
