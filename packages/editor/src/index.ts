@@ -1,6 +1,11 @@
 export * from "@tiptap/react";
-export * from "@tiptap/extension-document";
-export * from "@tiptap/extension-text";
-export * from "@tiptap/extension-paragraph";
-export * from "@tiptap/extension-heading";
-export * from "@tiptap/extension-image";
+export * as Document from "@tiptap/extension-document";
+export * as Text from "@tiptap/extension-text";
+export * as Paragraph from "@tiptap/extension-paragraph";
+export * as Heading from "@tiptap/extension-heading";
+export * as Image from "@tiptap/extension-image";
+export * as Bold from "@tiptap/extension-bold";
+export * as Italic from "@tiptap/extension-italic";
+export * as Underline from "@tiptap/extension-underline";
+export * as Color from "@tiptap/extension-color";
+export * as TextStyle from "@tiptap/extension-text-style";
