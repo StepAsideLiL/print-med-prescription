@@ -2,6 +2,7 @@
 
 import { store } from "@/lib/store";
 import { THeaderSection } from "@/lib/types";
+import Icons from "@workspace/design-system/icons";
 import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
 import {
@@ -27,11 +28,28 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
     extensions: [
       Document.Document,
       Text.Text,
+      Heading.Heading.configure({
+        levels: [1],
+        HTMLAttributes: {
+          class: "text-xl",
+        },
+      }),
       Paragraph.Paragraph,
-      Heading.Heading,
-      Bold.Bold,
-      Italic.Italic,
-      Underline.Underline,
+      Bold.Bold.configure({
+        HTMLAttributes: {
+          class: "font-semibold",
+        },
+      }),
+      Italic.Italic.configure({
+        HTMLAttributes: {
+          class: "italic",
+        },
+      }),
+      Underline.Underline.configure({
+        HTMLAttributes: {
+          class: "underline",
+        },
+      }),
       Color.Color,
       TextStyle.TextStyle,
     ],
@@ -61,16 +79,73 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
     >
       {get === section.id && (
         <div className="bg-muted absolute -top-14 w-full rounded border">
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            className="cursor-pointer"
-            onClick={() => {
-              updateHeaderText({ ...section, content: editor.getJSON() });
-            }}
-          >
-            Save
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.commands.toggleHeading({ level: 1 });
+              }}
+            >
+              <Icons.Heading />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.commands.setParagraph();
+              }}
+            >
+              <Icons.Paragraph />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.commands.toggleBold();
+              }}
+            >
+              <Icons.Bold />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.commands.toggleItalic();
+              }}
+            >
+              <Icons.Italic />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.commands.toggleUnderline();
+              }}
+            >
+              <Icons.Underline />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                updateHeaderText({ ...section, content: editor.getJSON() });
+              }}
+            >
+              Save
+            </Button>
+          </div>
         </div>
       )}
       <EditorContent editor={editor} />
