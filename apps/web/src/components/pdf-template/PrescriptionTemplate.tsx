@@ -1,5 +1,6 @@
 "use client";
 
+import FooterSection from "./FooterSection";
 import TemplateHeaderSection from "./TemplateHeaderSection";
 
 export default function PrescriptionTemplate() {
@@ -16,7 +17,7 @@ export default function PrescriptionTemplate() {
           <div className="grow">Body</div>
 
           <div className="border-foreground/50 flex-none border-t px-10 pb-10 pt-5">
-            Footer
+            <FooterSection />
           </div>
         </div>
       </div>

@@ -46,3 +46,12 @@ export type THeaderSection = {
   contentType: "text" | "img" | null;
   content: JSONContent | null;
 };
+
+export type TFooterSection = {
+  id: string;
+  style: {
+    width: string;
+  };
+  contentType: "text" | "img" | null;
+  content: JSONContent | null;
+};
