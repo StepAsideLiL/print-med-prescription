@@ -4,6 +4,7 @@ import { TMedListSchema } from "@/lib/types";
 import { nanoId } from "@/lib/nanoid";
 import * as Header from "./header";
 import * as Footer from "./footer";
+import * as Select from "./select";
 
 export function newMed(): TMedListSchema {
   return {
@@ -24,6 +25,7 @@ export function newMed(): TMedListSchema {
 export const store = {
   ...PageSize,
   ...Medicine,
+  ...Select,
   ...Header,
   ...Footer,
 };

@@ -41,12 +41,6 @@ export function FooterSection() {
   return { get, set };
 }
 
-const selectFooterSectionAtom = atom<string | null>(null);
-export function SelectFooterSection() {
-  const [get, set] = useAtom(selectFooterSectionAtom);
-  return { get, set };
-}
-
 const addFooterTextAtom = atom(null, (get, set, section: TFooterSection) => {
   set(
     footerSectionAtom,
