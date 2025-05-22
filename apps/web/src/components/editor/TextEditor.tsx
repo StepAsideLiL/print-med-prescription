@@ -91,7 +91,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                editor.commands.toggleHeading({ level: 1 });
+                editor.chain().focus().toggleHeading({ level: 1 }).run();
               }}
             >
               <Icons.Heading />
@@ -102,7 +102,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                editor.commands.setParagraph();
+                editor.chain().focus().setParagraph().run();
               }}
             >
               <Icons.Paragraph />
@@ -113,7 +113,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                editor.commands.toggleBold();
+                editor.chain().focus().toggleBold().run();
               }}
             >
               <Icons.Bold />
@@ -124,7 +124,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                editor.commands.toggleItalic();
+                editor.chain().focus().toggleItalic().run();
               }}
             >
               <Icons.Italic />
@@ -135,7 +135,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                editor.commands.toggleUnderline();
+                editor.chain().focus().toggleUnderline().run();
               }}
             >
               <Icons.Underline />
