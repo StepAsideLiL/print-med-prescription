@@ -57,7 +57,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
       Color.Color,
       TextStyle.TextStyle,
     ],
-    content: section.content,
+    content: section.content !== null ? section.content : "<p>Write...</p>",
     editorProps: {
       attributes: {
         class: "min-h-28 p-1 border-none focus-visible:outline-none",

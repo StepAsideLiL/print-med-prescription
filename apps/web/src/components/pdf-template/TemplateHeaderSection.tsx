@@ -37,11 +37,11 @@ export default function TemplateHeaderSection() {
   return (
     <div className="flex items-start gap-2">
       {get.map((section) => {
-        if (section.contentType === "text" && section.content !== null) {
+        if (section.contentType === "text") {
           return <TextEditor key={section.id} section={section} />;
         }
 
-        if (section.contentType === "img" && section.content === null) {
+        if (section.contentType === "img") {
           return <ImageEditor key={section.id} section={section} />;
         }
 

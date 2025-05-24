@@ -49,20 +49,7 @@ const addFooterTextAtom = atom(null, (get, set, section: TFooterSection) => {
         ? {
             ...section,
             contentType: "text" as TFooterSection["contentType"],
-            content: {
-              type: "doc",
-              content: [
-                {
-                  type: "paragraph",
-                  content: [
-                    {
-                      type: "text",
-                      text: "Write...",
-                    },
-                  ],
-                },
-              ],
-            },
+            content: null,
           }
         : s
     )

@@ -1,7 +1,7 @@
 "use client";
 
 import { store } from "@/lib/store";
-import { AddFooterText, footerSection } from "@/lib/store/footer";
+import { footerSection } from "@/lib/store/footer";
 import { Button } from "@workspace/design-system/ui/button";
 import TextEditor from "@/components/editor/TextEditor";
 import ImageEditor from "@/components/editor/ImageEditor";
@@ -37,11 +37,11 @@ export default function FooterSection() {
   return (
     <div className="flex items-start gap-2">
       {get.map((section) => {
-        if (section.contentType === "text" && section.content !== null) {
+        if (section.contentType === "text") {
           return <TextEditor key={section.id} section={section} />;
         }
 
-        if (section.contentType === "img" && section.content !== null) {
+        if (section.contentType === "img") {
           return <ImageEditor key={section.id} section={section} />;
         }
 

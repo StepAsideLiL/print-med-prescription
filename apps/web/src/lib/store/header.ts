@@ -49,20 +49,7 @@ const addHeaderTextAtom = atom(null, (get, set, section: THeaderSection) => {
         ? {
             ...section,
             contentType: "text" as THeaderSection["contentType"],
-            content: {
-              type: "doc",
-              content: [
-                {
-                  type: "paragraph",
-                  content: [
-                    {
-                      type: "text",
-                      text: "Write...",
-                    },
-                  ],
-                },
-              ],
-            },
+            content: null,
           }
         : s
     )
