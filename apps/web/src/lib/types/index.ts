@@ -38,13 +38,19 @@ export type TMedListSchema = {
   duration: TMedicationDuration;
 };
 
+export type TImageContent = {
+  name: string;
+  buffer: ArrayBuffer | Blob;
+  mimeType: string;
+};
+
 export type THeaderSection = {
   id: string;
   style: {
     width: string;
   };
   contentType: "text" | "img" | null;
-  content: JSONContent | null;
+  content: JSONContent | TImageContent | null;
 };
 
 export type TFooterSection = {
@@ -53,5 +59,5 @@ export type TFooterSection = {
     width: string;
   };
   contentType: "text" | "img" | null;
-  content: JSONContent | null;
+  content: JSONContent | TImageContent | null;
 };

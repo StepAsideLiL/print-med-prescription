@@ -81,19 +81,7 @@ const addHeaderImageAtom = atom(null, (get, set, section: THeaderSection) => {
         ? {
             ...section,
             contentType: "img" as THeaderSection["contentType"],
-            content: {
-              type: "doc",
-              content: [
-                {
-                  type: "image",
-                  attrs: {
-                    src: "https://placehold.co/100x100",
-                    alt: null,
-                    title: null,
-                  },
-                },
-              ],
-            },
+            content: null,
           }
         : s
     )
