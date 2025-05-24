@@ -2,33 +2,23 @@
 
 import { store } from "@/lib/store";
 import { THeaderSection } from "@/lib/types";
+import Icons from "@workspace/design-system/icons";
 import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
-import {
-  Document,
-  EditorContent,
-  Image,
-  Text,
-  useEditor,
-} from "@workspace/editor";
-import React from "react";
+import { Input } from "@workspace/design-system/ui/input";
+import { Label } from "@workspace/design-system/ui/label";
+import React, { useId, useState } from "react";
 
-export default function ImageEditor({ section }: { section: THeaderSection }) {
-  const { updateHeaderImage } = store.UpdateHeaderImage();
+export default function ImageEditor2({ section }: { section: THeaderSection }) {
+  const id = useId();
   const { get, set } = store.SelectSection();
+  const [file, setFile] = useState<File | null>();
+  const { updateHeaderImage } = store.UpdateHeaderImage();
+  const { removeHeaderSection } = store.RemoveHeaderSection();
 
-  const editor = useEditor({
-    extensions: [Document.Document, Text.Text, Image.Image],
-    content: section.content,
-    editorProps: {
-      attributes: {
-        class: "min-h-28 p-1 border-none focus-visible:outline-none",
-      },
-    },
-  });
-
-  if (editor === null) {
-    return null;
+  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files ? event.target.files[0] : null;
+    setFile(file);
   }
 
   return (
@@ -43,19 +33,64 @@ export default function ImageEditor({ section }: { section: THeaderSection }) {
         set(section.id);
       }}
     >
-      <div className="bg-muted absolute -top-14 w-full rounded border p-1">
-        <Button
-          variant={"secondary"}
-          size={"sm"}
-          className="cursor-pointer"
-          onClick={() => {
-            updateHeaderImage({ ...section, content: editor.getJSON() });
-          }}
+      {get === section.id && (
+        <div className="bg-muted absolute -top-14 w-fit rounded border">
+          <div className="flex items-center gap-1 p-1">
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                removeHeaderSection(section);
+              }}
+            >
+              <Icons.Delete />
+            </Button>
+
+            <Button
+              variant={"outline"}
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={async () => {
+                if (file) {
+                  updateHeaderImage({
+                    ...section,
+                    content: {
+                      name: file.name,
+                      buffer: file,
+                      mimeType: file.type,
+                    },
+                  });
+                }
+              }}
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <div className="min-h-28">
+        <Label
+          htmlFor={`${id}-image-input`}
+          className="mx-auto h-28 w-28 overflow-hidden rounded-full"
         >
-          Save
-        </Button>
+          <img
+            src={
+              file ? URL.createObjectURL(file) : "https://placehold.co/100x100"
+            }
+            className="h-full w-full object-cover"
+          />
+          <Input
+            type="file"
+            id={`${id}-image-input`}
+            className="sr-only"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleFileChange(event)
+            }
+          />
+        </Label>
       </div>
-      <EditorContent editor={editor} />
     </div>
   );
 }

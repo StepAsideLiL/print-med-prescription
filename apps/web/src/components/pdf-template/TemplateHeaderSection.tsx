@@ -41,7 +41,7 @@ export default function TemplateHeaderSection() {
           return <TextEditor key={section.id} section={section} />;
         }
 
-        if (section.contentType === "img" && section.content !== null) {
+        if (section.contentType === "img" && section.content === null) {
           return <ImageEditor key={section.id} section={section} />;
         }
 
