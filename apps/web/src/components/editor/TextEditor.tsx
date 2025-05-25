@@ -1,7 +1,7 @@
 "use client";
 
 import { store } from "@/lib/store";
-import { THeaderSection } from "@/lib/types";
+import { TTemplateSectionSchema } from "@/lib/types";
 import Icons from "@workspace/design-system/icons";
 import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
@@ -19,10 +19,16 @@ import {
   useEditor,
 } from "@workspace/editor";
 
-export default function TextEditor({ section }: { section: THeaderSection }) {
-  const { updateHeaderText } = store.UpdateHeaderText();
+export default function TextEditor({
+  place,
+  section,
+}: {
+  place: "header" | "footer";
+  section: TTemplateSectionSchema;
+}) {
   const { get, set } = store.SelectSection();
-  const { removeHeaderSection } = store.RemoveHeaderSection();
+  const { updateSectionContent } = store.UpdateSectionContent();
+  const { removeSectionContent } = store.RemoveSectionContent();
 
   const editor = useEditor({
     extensions: [
@@ -146,7 +152,7 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                removeHeaderSection(section);
+                removeSectionContent({ place, section });
               }}
             >
               <Icons.Delete />
@@ -157,7 +163,10 @@ export default function TextEditor({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                updateHeaderText({ ...section, content: editor.getJSON() });
+                updateSectionContent({
+                  place,
+                  section: { ...section, content: editor.getJSON() },
+                });
               }}
             >
               Save

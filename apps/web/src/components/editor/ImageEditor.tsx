@@ -1,7 +1,7 @@
 "use client";
 
 import { store } from "@/lib/store";
-import { THeaderSection } from "@/lib/types";
+import { TTemplateSectionSchema } from "@/lib/types";
 import Icons from "@workspace/design-system/icons";
 import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
@@ -9,12 +9,20 @@ import { Input } from "@workspace/design-system/ui/input";
 import { Label } from "@workspace/design-system/ui/label";
 import React, { useId, useState } from "react";
 
-export default function ImageEditor2({ section }: { section: THeaderSection }) {
+export default function ImageEditor({
+  place,
+  section,
+}: {
+  place: "header" | "footer";
+  section: TTemplateSectionSchema;
+}) {
   const id = useId();
   const { get, set } = store.SelectSection();
   const [file, setFile] = useState<File | null>();
-  const { updateHeaderImage } = store.UpdateHeaderImage();
-  const { removeHeaderSection } = store.RemoveHeaderSection();
+  const { updateSectionContent } = store.UpdateSectionContent();
+  const { removeSectionContent } = store.RemoveSectionContent();
+  // const { updateHeaderImage } = store.UpdateHeaderImage();
+  // const { removeHeaderSection } = store.RemoveHeaderSection();
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files ? event.target.files[0] : null;
@@ -41,7 +49,7 @@ export default function ImageEditor2({ section }: { section: THeaderSection }) {
               size={"sm"}
               className="cursor-pointer"
               onClick={() => {
-                removeHeaderSection(section);
+                removeSectionContent({ place, section });
               }}
             >
               <Icons.Delete />
@@ -53,12 +61,15 @@ export default function ImageEditor2({ section }: { section: THeaderSection }) {
               className="cursor-pointer"
               onClick={async () => {
                 if (file) {
-                  updateHeaderImage({
-                    ...section,
-                    content: {
-                      name: file.name,
-                      buffer: file,
-                      mimeType: file.type,
+                  updateSectionContent({
+                    place,
+                    section: {
+                      ...section,
+                      content: {
+                        name: file.name,
+                        buffer: file,
+                        mimeType: file.type,
+                      },
                     },
                   });
                 }

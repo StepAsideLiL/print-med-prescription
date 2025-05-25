@@ -12,6 +12,7 @@ localDB.version(1).stores({
 });
 
 export default {
+  localDB,
   addTemplate: async (ht: THeaderSection[], ft: TFooterSection[]) => {
     await localDB.headerTemplate.bulkAdd(ht);
     await localDB.footerTemplate.bulkAdd(ft);

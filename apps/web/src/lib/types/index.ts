@@ -44,7 +44,7 @@ export type TImageContent = {
   mimeType: string;
 };
 
-export type THeaderSection = {
+export type TTemplateSectionSchema = {
   id: string;
   style: {
     width: string;
@@ -53,11 +53,7 @@ export type THeaderSection = {
   content: JSONContent | TImageContent | null;
 };
 
-export type TFooterSection = {
-  id: string;
-  style: {
-    width: string;
-  };
-  contentType: "text" | "img" | null;
-  content: JSONContent | TImageContent | null;
+export type TTemplateSection = {
+  header: TTemplateSectionSchema[];
+  footer: TTemplateSectionSchema[];
 };

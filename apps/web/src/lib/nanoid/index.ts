@@ -6,4 +6,5 @@ export const nanoId = {
     customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 5)(),
   footerSectionId: () =>
     customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 5)(),
+  sectionId: () => customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 5)(),
 };

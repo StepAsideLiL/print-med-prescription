@@ -1,17 +1,20 @@
-"use client";
-
 import { store } from "@/lib/store";
-import { footerSection } from "@/lib/store/footer";
 import { Button } from "@workspace/design-system/ui/button";
 import TextEditor from "@/components/editor/TextEditor";
 import ImageEditor from "@/components/editor/ImageEditor";
 
-export default function FooterSection() {
-  const { get, set } = store.FooterSection();
-  const { addFooterText } = store.AddFooterText();
-  const { addFooterImage } = store.AddFooterImage();
+export default function TemplateSection({
+  place,
+}: {
+  place: "header" | "footer";
+}) {
+  const { createTemplateSection } = store.CreateTemplateSection();
+  const { get } = store.TemplateSection();
+  const { addSectionContent } = store.AddSectionContent();
 
-  if (get.length === 0) {
+  console.log(get);
+
+  if (get[place].length === 0) {
     return (
       <div className="flex min-h-28 items-center justify-center gap-2">
         {["1", "2", "3"].map((col) => (
@@ -19,13 +22,7 @@ export default function FooterSection() {
             key={col}
             variant={"outline"}
             className="cursor-pointer"
-            onClick={() =>
-              set(
-                Array.from({ length: parseInt(col) }).map(() =>
-                  footerSection(col.toString())
-                )
-              )
-            }
+            onClick={() => createTemplateSection({ col, place })}
           >
             {col} Column
           </Button>
@@ -36,13 +33,17 @@ export default function FooterSection() {
 
   return (
     <div className="flex items-start gap-2">
-      {get.map((section) => {
+      {get[place].map((section) => {
         if (section.contentType === "text") {
-          return <TextEditor key={section.id} section={section} />;
+          return (
+            <TextEditor key={section.id} place={place} section={section} />
+          );
         }
 
         if (section.contentType === "img") {
-          return <ImageEditor key={section.id} section={section} />;
+          return (
+            <ImageEditor key={section.id} place={place} section={section} />
+          );
         }
 
         return (
@@ -55,7 +56,7 @@ export default function FooterSection() {
               variant={"outline"}
               className="cursor-pointer"
               onClick={() => {
-                addFooterText(section);
+                addSectionContent({ place, section, contentType: "text" });
               }}
             >
               Add Text
@@ -65,7 +66,7 @@ export default function FooterSection() {
               variant={"outline"}
               className="cursor-pointer"
               onClick={() => {
-                addFooterImage(section);
+                addSectionContent({ place, section, contentType: "img" });
               }}
             >
               Add Image
