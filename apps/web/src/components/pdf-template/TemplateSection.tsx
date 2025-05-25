@@ -12,8 +12,6 @@ export default function TemplateSection({
   const { get } = store.TemplateSection();
   const { addSectionContent } = store.AddSectionContent();
 
-  console.log(get);
-
   if (get[place].length === 0) {
     return (
       <div className="flex min-h-28 items-center justify-center gap-2">
