@@ -2,7 +2,7 @@
 
 import FooterSection from "./FooterSection";
 import SaveTemplateButton from "./SaveTemplateButton";
-import TemplateHeaderSection from "./TemplateHeaderSection";
+import TemplateHeaderSection from "./HeaderSection";
 
 export default function PrescriptionTemplate() {
   return (
