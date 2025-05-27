@@ -5,6 +5,7 @@ import { toast } from "@workspace/design-system/lib/toast";
 import { Badge } from "@workspace/design-system/ui/badge";
 import { Button } from "@workspace/design-system/ui/button";
 import { useLiveQuery } from "dexie-react-hooks";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function TemplateList() {
@@ -12,11 +13,19 @@ export default function TemplateList() {
   const route = useRouter();
 
   if (templates === undefined) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <p className="text-muted-foreground text-center">Loading...</p>
+      </div>
+    );
   }
 
   if (templates.length === 0) {
-    return <div>No Templates</div>;
+    return (
+      <div>
+        <p className="text-muted-foreground text-center">No Templates</p>
+      </div>
+    );
   }
 
   return (
@@ -47,8 +56,8 @@ export default function TemplateList() {
             >
               {template.active ? "Deactivate" : "Activate"}
             </Button>
-            <Button variant={"outline"} className="cursor-pointer">
-              Edit Template
+            <Button variant={"outline"} className="cursor-pointer" asChild>
+              <Link href={`/edit-template/${template.id}`}>Edit Template</Link>
             </Button>
             <Button
               variant={"destructive"}
