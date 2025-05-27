@@ -2,11 +2,14 @@ import { store } from "@/lib/store";
 import { Button } from "@workspace/design-system/ui/button";
 import TextEditor from "@/components/editor/TextEditor";
 import ImageEditor from "@/components/editor/ImageEditor";
+import { TTemplate } from "@/lib/types";
 
 export default function TemplateSection({
   place,
+  template,
 }: {
   place: "header" | "footer";
+  template: TTemplate | undefined;
 }) {
   const { createTemplateSection } = store.CreateTemplateSection();
   const { get } = store.TemplateSection();

@@ -15,12 +15,20 @@ export default {
   getTemplates: async () => {
     return await localDB.template.toArray();
   },
+  getTemplate: async (id: string) => {
+    return await localDB.template.get(id);
+  },
   createNewTemplate: async (template: TTemplateSection) => {
     await localDB.template.add({
       id: nanoId.templateId(),
       active: false,
       name: "New Template",
       template,
+    });
+  },
+  updateTemplate: async (templateId: string, template: TTemplateSection) => {
+    await localDB.template.update(templateId, {
+      template: template,
     });
   },
   deleteTemplate: async (id: string) => {
