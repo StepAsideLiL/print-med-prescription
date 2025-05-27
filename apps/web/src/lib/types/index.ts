@@ -40,7 +40,7 @@ export type TMedListSchema = {
 
 export type TImageContent = {
   name: string;
-  buffer: ArrayBuffer | Blob;
+  buffer: Blob;
   mimeType: string;
 };
 
@@ -56,4 +56,11 @@ export type TTemplateSectionSchema = {
 export type TTemplateSection = {
   header: TTemplateSectionSchema[];
   footer: TTemplateSectionSchema[];
+};
+
+export type TTemplate = {
+  id: string;
+  name: string;
+  active: boolean;
+  template: TTemplateSection;
 };

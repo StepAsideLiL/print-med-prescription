@@ -1,20 +1,26 @@
 import Dexie, { EntityTable } from "dexie";
-import { TFooterSection, THeaderSection } from "@/lib/types";
+import { TTemplate, TTemplateSection } from "@/lib/types";
+import { nanoId } from "@/lib/nanoid";
 
 const localDB = new Dexie("pmp-template-v1") as Dexie & {
-  headerTemplate: EntityTable<THeaderSection, "id">;
-  footerTemplate: EntityTable<TFooterSection, "id">;
+  template: EntityTable<TTemplate, "id">;
 };
 
 localDB.version(1).stores({
-  headerTemplate: "id",
-  footerTemplate: "id",
+  template: "id",
 });
 
 export default {
   localDB,
-  addTemplate: async (ht: THeaderSection[], ft: TFooterSection[]) => {
-    await localDB.headerTemplate.bulkAdd(ht);
-    await localDB.footerTemplate.bulkAdd(ft);
+  getTemplates: async () => {
+    return await localDB.template.toArray();
+  },
+  createNewTemplate: async (template: TTemplateSection) => {
+    await localDB.template.add({
+      id: nanoId.templateId(),
+      active: false,
+      name: "New Template",
+      template,
+    });
   },
 } as const;
