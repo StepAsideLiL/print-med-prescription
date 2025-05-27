@@ -20,8 +20,8 @@ export default function Layout({
               New Prescription
             </Link>
 
-            <Link href={"/create-template"} className="hover:underline">
-              Create Template
+            <Link href={"/templates"} className="hover:underline">
+              Templates
             </Link>
           </div>
 
