@@ -31,7 +31,20 @@ export default function TemplateList() {
           </div>
 
           <div className="flex items-center gap-1">
-            <Button variant={"outline"} className="cursor-pointer">
+            <Button
+              variant={"outline"}
+              className="cursor-pointer"
+              onClick={async () => {
+                await db
+                  .toggleActiveTemplate(template.id)
+                  .then(() => {
+                    route.refresh();
+                  })
+                  .catch(() => {
+                    toast.error("Failed to toggle template active status.");
+                  });
+              }}
+            >
               {template.active ? "Deactivate" : "Activate"}
             </Button>
             <Button variant={"outline"} className="cursor-pointer">

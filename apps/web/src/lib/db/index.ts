@@ -33,4 +33,16 @@ export default {
     }
     await localDB.template.delete(id);
   },
+  toggleActiveTemplate: async (id: string) => {
+    const template = await localDB.template.toArray();
+
+    await localDB.template.bulkUpdate(
+      template.map((t) => ({
+        key: t.id,
+        changes: {
+          active: t.id === id ? !t.active : false,
+        },
+      }))
+    );
+  },
 } as const;
