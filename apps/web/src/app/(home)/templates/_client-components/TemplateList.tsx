@@ -1,12 +1,15 @@
 "use client";
 
 import db from "@/lib/db";
+import { toast } from "@workspace/design-system/lib/toast";
 import { Badge } from "@workspace/design-system/ui/badge";
 import { Button } from "@workspace/design-system/ui/button";
 import { useLiveQuery } from "dexie-react-hooks";
+import { useRouter } from "next/navigation";
 
 export default function TemplateList() {
   const templates = useLiveQuery(() => db.getTemplates());
+  const route = useRouter();
 
   if (templates === undefined) {
     return <div>Loading...</div>;
@@ -37,6 +40,22 @@ export default function TemplateList() {
             <Button
               variant={"destructive"}
               className="active:bg-destructive/70 cursor-pointer"
+              onClick={async () => {
+                if (template.active === true) {
+                  toast.error("Template is active, deactivate to delete.");
+                  return;
+                }
+
+                await db
+                  .deleteTemplate(template.id)
+                  .then(() => {
+                    toast.success("Template deleted successfully.");
+                    route.refresh();
+                  })
+                  .catch(() => {
+                    toast.error("Failed to delete template.");
+                  });
+              }}
             >
               Delete Template
             </Button>

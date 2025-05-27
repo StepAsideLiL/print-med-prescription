@@ -23,4 +23,14 @@ export default {
       template,
     });
   },
+  deleteTemplate: async (id: string) => {
+    const template = await localDB.template.get(id);
+    if (template === undefined) {
+      return;
+    }
+    if (template.active === true) {
+      return;
+    }
+    await localDB.template.delete(id);
+  },
 } as const;
