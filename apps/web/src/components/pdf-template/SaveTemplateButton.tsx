@@ -12,7 +12,11 @@ export default function SaveTemplateButton() {
       variant={"outline"}
       className="cursor-pointer"
       onClick={() => {
-        db.addTemplate(get.header, get.footer);
+        if (get.header.length === 0 && get.footer.length === 0) {
+          return;
+        }
+
+        db.createNewTemplate(get);
       }}
     >
       Save Template
