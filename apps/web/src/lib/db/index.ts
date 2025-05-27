@@ -18,11 +18,14 @@ export default {
   getTemplate: async (id: string) => {
     return await localDB.template.get(id);
   },
-  createNewTemplate: async (template: TTemplateSection) => {
+  createNewTemplate: async (
+    templateName: string = "New Template",
+    template: TTemplateSection
+  ) => {
     await localDB.template.add({
       id: nanoId.templateId(),
       active: false,
-      name: "New Template",
+      name: templateName,
       template,
     });
   },

@@ -6,10 +6,8 @@ import { TTemplate } from "@/lib/types";
 
 export default function TemplateSection({
   place,
-  template,
 }: {
   place: "header" | "footer";
-  template: TTemplate | undefined;
 }) {
   const { createTemplateSection } = store.CreateTemplateSection();
   const { get } = store.TemplateSection();

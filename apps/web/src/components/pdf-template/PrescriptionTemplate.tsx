@@ -12,18 +12,24 @@ export default function PrescriptionTemplate({
 }: {
   templateId?: string;
 }) {
-  const [template, setTemplate] = React.useState<TTemplate | undefined>(
-    undefined
-  );
+  const [template, setTemplate] = React.useState<TTemplate>({
+    id: "",
+    name: "",
+    active: false,
+    template: {
+      header: [],
+      footer: [],
+    },
+  });
   const { set } = store.TemplateSection();
 
   React.useEffect(() => {
     if (templateId) {
       db.getTemplate(templateId).then((t) => {
-        setTemplate(t);
         if (t === undefined) {
           return;
         }
+        setTemplate(t);
         set(t.template);
       });
     }
@@ -38,7 +44,7 @@ export default function PrescriptionTemplate({
       <div className="bg-background h-[1360px] w-[1000px]">
         <div className="flex h-full flex-col">
           <div className="flex-none px-10 pb-5 pt-10">
-            <TemplateSection place="header" template={template} />
+            <TemplateSection place="header" />
           </div>
 
           <div className="border-foreground/50 border-y">Name</div>
@@ -46,7 +52,7 @@ export default function PrescriptionTemplate({
           <div className="grow">Body</div>
 
           <div className="border-foreground/50 flex-none border-t px-10 pb-10 pt-5">
-            <TemplateSection place="footer" template={template} />
+            <TemplateSection place="footer" />
           </div>
         </div>
       </div>
