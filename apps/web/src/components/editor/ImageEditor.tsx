@@ -21,8 +21,6 @@ export default function ImageEditor({
   const [file, setFile] = useState<File | null>();
   const { updateSectionContent } = store.UpdateSectionContent();
   const { removeSectionContent } = store.RemoveSectionContent();
-  // const { updateHeaderImage } = store.UpdateHeaderImage();
-  // const { removeHeaderSection } = store.RemoveHeaderSection();
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files ? event.target.files[0] : null;
