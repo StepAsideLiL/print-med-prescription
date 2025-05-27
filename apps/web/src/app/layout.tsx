@@ -1,4 +1,5 @@
 import fonts from "@/lib/fonts";
+import { Toaster } from "@workspace/design-system/ui/sonner";
 import "@workspace/design-system/globals.css";
 import "./style.css";
 import { Metadata } from "next";
@@ -22,6 +23,8 @@ export default function RootLayout({
         className={`${fonts.GeistSans.variable} ${fonts.GeistSans.variable} bg-muted font-sans antialiased`}
       >
         {children}
+
+        <Toaster />
       </body>
     </html>
   );
