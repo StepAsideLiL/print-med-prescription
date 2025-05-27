@@ -27,6 +27,10 @@ export default function ImageEditor({
     setFile(file);
   }
 
+  React.useEffect(() => {
+    setFile(section.content?.buffer);
+  }, []);
+
   return (
     <div
       style={section.style}
