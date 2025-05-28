@@ -2,21 +2,24 @@
 
 import { PDFViewer } from "@react-pdf/renderer";
 import PdfDoc from "./PdfDoc";
-import { store } from "@/lib/store";
 import db from "@/lib/db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 export default function ViewPdf() {
-  const { get } = store.MedicineList();
   const template = useLiveQuery(() => db.getActiveTemplate());
+  const medList = useLiveQuery(() => db.getMedList());
 
-  if (get.length === 0 || template === undefined) {
+  if (medList === undefined || medList.length === 0) {
+    return null;
+  }
+
+  if (template === undefined) {
     return null;
   }
 
   return (
     <PDFViewer className="h-screen w-full" showToolbar={true}>
-      <PdfDoc medList={get} template={template} />
+      <PdfDoc medList={medList} template={template} />
     </PDFViewer>
   );
 }
