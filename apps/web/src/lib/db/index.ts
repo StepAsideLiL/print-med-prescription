@@ -18,6 +18,10 @@ export default {
   getTemplate: async (id: string) => {
     return await localDB.template.get(id);
   },
+  getActiveTemplate: async () => {
+    const templates = await localDB.template.toArray();
+    return templates.find((t) => t.active === true);
+  },
   createNewTemplate: async (
     templateName: string = "New Template",
     template: TTemplateSection
