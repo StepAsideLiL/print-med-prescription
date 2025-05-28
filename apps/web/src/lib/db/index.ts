@@ -1,17 +1,26 @@
 import Dexie, { EntityTable } from "dexie";
-import { TTemplate, TTemplateSection } from "@/lib/types";
+import { TMedListSchema, TTemplate, TTemplateSection } from "@/lib/types";
 import { nanoId } from "@/lib/nanoid";
 
 const localDB = new Dexie("pmp-template-v1") as Dexie & {
   template: EntityTable<TTemplate, "id">;
+  medList: EntityTable<TMedListSchema, "id">;
 };
 
 localDB.version(1).stores({
   template: "id",
+  medList: "id",
 });
 
 export default {
   localDB,
+  getMedList: async () => {
+    return await localDB.medList.toArray();
+  },
+  createMedList: async (medList: TMedListSchema[]) => {
+    await localDB.medList.clear();
+    await localDB.medList.bulkAdd(medList);
+  },
   getTemplates: async () => {
     return await localDB.template.toArray();
   },
