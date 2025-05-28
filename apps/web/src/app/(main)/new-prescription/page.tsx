@@ -1,4 +1,5 @@
 import AddMedicine from "@/components/AddMedicine";
+import ClearListButton from "@/components/med-list/ClearListButton";
 import PreviewButton from "@/components/med-list/PreviewButton";
 import MedicineList from "@/components/MedicineList";
 import PagePreview from "@/components/PagePreview";
@@ -15,7 +16,11 @@ export default function Page() {
       <div className="flex items-center justify-between">
         <SelectPageSize />
 
-        <PreviewButton />
+        <div className="flex items-center gap-2">
+          <ClearListButton />
+
+          <PreviewButton />
+        </div>
       </div>
 
       <PagePreview>
