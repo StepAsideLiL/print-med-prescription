@@ -1,9 +1,5 @@
-import ViewPdf from "@/components/ViewPdf";
+import ViewPdf from "@/components/preview-pdf/ViewPdf";
 
 export default function page() {
-  return (
-    <main>
-      <ViewPdf />
-    </main>
-  );
+  return <ViewPdf />;
 }
