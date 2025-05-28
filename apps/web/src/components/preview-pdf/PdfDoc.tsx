@@ -1,6 +1,6 @@
 "use client";
 
-import { TMedListSchema } from "@/lib/types";
+import { TMedListSchema, TTemplate } from "@/lib/types";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -18,7 +18,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function PdfDoc({ medList }: { medList: TMedListSchema[] }) {
+export default function PdfDoc({
+  medList,
+  template,
+}: {
+  medList: TMedListSchema[];
+  template: TTemplate;
+}) {
+  console.log(template);
+
   return (
     <Document pageLayout="twoColumnLeft">
       <Page size="A4" style={styles.page}>
