@@ -132,11 +132,84 @@ function Footer({
 }
 
 function RenderText({ content }: { content: JSONContent }) {
-  return (
-    <View>
-      <Text>{JSON.stringify(content)}</Text>
-    </View>
-  );
+  /**
+   * Recursively wrap plain text with mark components (bold, italic, link, …).
+   */
+  const renderMarks = (
+    text: string,
+    marks?: JSONContent["marks"]
+  ): React.ReactNode => {
+    if (!marks || marks.length === 0) return text;
+
+    return marks.reduceRight<React.ReactNode>((inner, mark) => {
+      switch (mark.type) {
+        case "bold":
+          return (
+            <Text key={mark.type} style={{ fontWeight: "700" }}>
+              {inner}
+            </Text>
+          );
+        case "italic":
+          return (
+            <Text key={mark.type} style={{ fontStyle: "italic" }}>
+              {inner}
+            </Text>
+          );
+        case "underline":
+          return (
+            <Text key={mark.type} style={{ textDecoration: "underline" }}>
+              {inner}
+            </Text>
+          );
+        default:
+          return <Text key={mark.type}>{inner}</Text>; // Unknown mark → render inner contents unchanged
+      }
+    }, text);
+  };
+
+  /**
+   * Render an individual node according to its `type`.
+   */
+  const renderNode = (node: JSONContent, index: number): React.ReactNode => {
+    const renderChildren = () =>
+      node.content?.map((child, i) => renderNode(child, i));
+
+    switch (node.type) {
+      case "paragraph":
+        return (
+          <Text key={index} style={{ fontSize: 14 }}>
+            {renderChildren()}
+          </Text>
+        );
+
+      case "heading": {
+        return (
+          <Text key={index} style={{ fontSize: 24 }}>
+            {renderChildren()}
+          </Text>
+        );
+      }
+
+      default:
+        // Leaf node with plain text (apply marks), or unknown node type → recurse
+        if (node.text) {
+          return <Text key={index}>{renderMarks(node.text, node.marks)}</Text>;
+        }
+        // Fallback: render its children if we don’t explicitly handle the node type
+        return renderChildren();
+    }
+  };
+
+  /**
+   * Handle both a single root node and an array of sibling nodes.
+   */
+  const renderContent = (content: JSONContent | JSONContent[]) =>
+    Array.isArray(content)
+      ? content.map((node, i) => renderNode(node, i))
+      : renderNode(content, 0);
+
+  // Using `prose` gives you nice defaults if you have the Tailwind Typography plugin installed.
+  return <View style={{}}>{renderContent(content)}</View>;
 }
 
 function RenderImage({ content }: { content: TImageContent }) {
