@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="mx-auto w-full max-w-5xl space-y-2 px-5 py-5 md:px-0">
-      <div className="flex w-full justify-between">
+      <div className="flex w-full items-center justify-between">
         <div className="w-full space-y-2">
           <h1 className="text-balance text-5xl font-semibold">
             Print Medicine Prescription
