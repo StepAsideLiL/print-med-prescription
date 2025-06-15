@@ -8,7 +8,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <header className="border-b py-5">
         <nav className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 md:px-0">
           <div className="flex items-center gap-5">
@@ -33,7 +33,7 @@ export default function Layout({
         </nav>
       </header>
 
-      {children}
+      <div className="flex-1">{children}</div>
 
       <footer className="bg-background border-t">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 md:px-0">
@@ -53,6 +53,6 @@ export default function Layout({
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
