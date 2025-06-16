@@ -5,6 +5,7 @@ import { TTemplateSectionSchema } from "@/lib/types";
 import Icons from "@workspace/design-system/icons";
 import { cn } from "@workspace/design-system/lib/utils";
 import { Button } from "@workspace/design-system/ui/button";
+import { Separator } from "@workspace/design-system/ui/separator";
 import {
   Bold,
   Color,
@@ -14,6 +15,7 @@ import {
   Italic,
   Paragraph,
   Text,
+  TextAlign,
   TextStyle,
   Underline,
   useEditor,
@@ -60,6 +62,10 @@ export default function TextEditor({
           class: "underline",
         },
       }),
+      TextAlign.TextAlign.configure({
+        types: ["heading", "paragraph"],
+        defaultAlignment: "left",
+      }),
       Color.Color,
       TextStyle.TextStyle,
     ],
@@ -95,7 +101,7 @@ export default function TextEditor({
     >
       {get === section.id && (
         <div className="bg-muted absolute -top-14 w-fit rounded border">
-          <div className="flex items-center gap-1 p-1">
+          <div className="flex h-10 items-center gap-1 p-1">
             <Button
               variant={
                 editor.isActive("heading", { level: 1 }) ? "default" : "outline"
@@ -119,6 +125,8 @@ export default function TextEditor({
             >
               <Icons.Paragraph />
             </Button>
+
+            <Separator orientation="vertical" className="bg-border" />
 
             <Button
               variant={editor.isActive("bold") ? "default" : "outline"}
@@ -152,6 +160,78 @@ export default function TextEditor({
             >
               <Icons.Underline />
             </Button>
+
+            <Separator orientation="vertical" className="bg-border" />
+
+            <Button
+              variant={
+                editor.getAttributes(
+                  editor.state.selection.$anchor.node().type.name
+                ).textAlign === "left"
+                  ? "default"
+                  : "outline"
+              }
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.chain().focus().setTextAlign("left").run();
+              }}
+            >
+              <Icons.AlignLeft />
+            </Button>
+
+            <Button
+              variant={
+                editor.getAttributes(
+                  editor.state.selection.$anchor.node().type.name
+                ).textAlign === "center"
+                  ? "default"
+                  : "outline"
+              }
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.chain().focus().setTextAlign("center").run();
+              }}
+            >
+              <Icons.AlignCenter />
+            </Button>
+
+            <Button
+              variant={
+                editor.getAttributes(
+                  editor.state.selection.$anchor.node().type.name
+                ).textAlign === "right"
+                  ? "default"
+                  : "outline"
+              }
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.chain().focus().setTextAlign("right").run();
+              }}
+            >
+              <Icons.AlignRight />
+            </Button>
+
+            <Button
+              variant={
+                editor.getAttributes(
+                  editor.state.selection.$anchor.node().type.name
+                ).textAlign === "justify"
+                  ? "default"
+                  : "outline"
+              }
+              size={"sm"}
+              className="cursor-pointer"
+              onClick={() => {
+                editor.chain().focus().setTextAlign("justify").run();
+              }}
+            >
+              <Icons.AlignJustify />
+            </Button>
+
+            <Separator orientation="vertical" className="bg-border" />
 
             <Button
               variant={"outline"}
