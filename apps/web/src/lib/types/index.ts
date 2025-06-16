@@ -42,6 +42,10 @@ export type TImageContent = {
   name: string;
   buffer: Blob;
   mimeType: string;
+  style?: {
+    align?: "left" | "center" | "right";
+    size?: string;
+  };
 };
 
 export type TTemplateSectionSchema = {
