@@ -69,6 +69,12 @@ export default function TextEditor({
         class: "min-h-28 p-1 border-none focus-visible:outline-none",
       },
     },
+    onUpdate: ({ editor }) => {
+      updateSectionContent({
+        place,
+        section: { ...section, content: editor.getJSON() },
+      });
+    },
   });
 
   if (editor === null) {
@@ -158,7 +164,7 @@ export default function TextEditor({
               <Icons.Delete className="text-destructive" />
             </Button>
 
-            <Button
+            {/* <Button
               variant={"outline"}
               size={"sm"}
               className="cursor-pointer"
@@ -170,7 +176,7 @@ export default function TextEditor({
               }}
             >
               Save
-            </Button>
+            </Button> */}
           </div>
         </div>
       )}
