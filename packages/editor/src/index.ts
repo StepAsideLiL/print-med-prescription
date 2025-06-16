@@ -9,3 +9,4 @@ export * as Italic from "@tiptap/extension-italic";
 export * as Underline from "@tiptap/extension-underline";
 export * as Color from "@tiptap/extension-color";
 export * as TextStyle from "@tiptap/extension-text-style";
+export * as TextAlign from "@tiptap/extension-text-align";
