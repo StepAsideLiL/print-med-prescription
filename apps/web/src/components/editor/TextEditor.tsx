@@ -155,7 +155,7 @@ export default function TextEditor({
                 removeSectionContent({ place, section });
               }}
             >
-              <Icons.Delete />
+              <Icons.Delete className="text-destructive" />
             </Button>
 
             <Button
