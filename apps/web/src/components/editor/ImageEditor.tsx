@@ -138,10 +138,11 @@ export default function ImageEditor({
       )}
 
       <div
-        className="flex min-h-28"
+        className="flex min-h-28 cursor-text"
         style={{
           justifyContent:
-            section.content?.style?.align === "left"
+            !section.content?.style?.align ||
+            section.content.style.align === "left"
               ? "flex-start"
               : section.content?.style?.align === "center"
                 ? "center"
@@ -150,8 +151,13 @@ export default function ImageEditor({
       >
         <Label
           htmlFor={`${id}-image-input`}
-          className="h-28 w-28 overflow-hidden rounded-full"
+          className="relative h-28 w-28 cursor-pointer overflow-hidden rounded-full"
         >
+          <div className="group absolute inset-0 flex h-full w-full items-center justify-center bg-transparent transition-all hover:bg-black/40">
+            <span className="block text-transparent transition-all group-hover:text-white">
+              Upload Image
+            </span>
+          </div>
           <img
             src={
               file ? URL.createObjectURL(file) : "https://placehold.co/100x100"
@@ -173,10 +179,15 @@ export default function ImageEditor({
                   section: {
                     ...section,
                     content: {
-                      ...section.content,
                       name: file.name,
                       buffer: file,
                       mimeType: file.type,
+                      style: {
+                        ...section.content?.style,
+                        align: section.content?.style?.align
+                          ? section.content.style.align
+                          : "left",
+                      },
                     },
                   },
                 });
