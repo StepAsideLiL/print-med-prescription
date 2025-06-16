@@ -22,10 +22,10 @@ export default function ImageEditor({
   const { updateSectionContent } = store.UpdateSectionContent();
   const { removeSectionContent } = store.RemoveSectionContent();
 
-  async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files ? event.target.files[0] : null;
-    setFile(file);
-  }
+  // async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   const file = event.target.files ? event.target.files[0] : null;
+  //   setFile(file);
+  // }
 
   React.useEffect(() => {
     setFile(section.content?.buffer);
@@ -57,7 +57,7 @@ export default function ImageEditor({
               <Icons.Delete />
             </Button>
 
-            <Button
+            {/* <Button
               variant={"outline"}
               size={"sm"}
               className="cursor-pointer"
@@ -78,7 +78,7 @@ export default function ImageEditor({
               }}
             >
               Save
-            </Button>
+            </Button> */}
           </div>
         </div>
       )}
@@ -98,9 +98,23 @@ export default function ImageEditor({
             type="file"
             id={`${id}-image-input`}
             className="sr-only"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleFileChange(event)
-            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              // handleFileChange(event);
+              const file = event.target.files ? event.target.files[0] : null;
+              if (file) {
+                updateSectionContent({
+                  place,
+                  section: {
+                    ...section,
+                    content: {
+                      name: file.name,
+                      buffer: file,
+                      mimeType: file.type,
+                    },
+                  },
+                });
+              }
+            }}
           />
         </Label>
       </div>
