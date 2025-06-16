@@ -177,14 +177,14 @@ function RenderText({ content }: { content: JSONContent }) {
     switch (node.type) {
       case "paragraph":
         return (
-          <Text key={index} style={{ fontSize: 14 }}>
+          <Text key={index} style={{ fontSize: 12 }}>
             {renderChildren()}
           </Text>
         );
 
       case "heading": {
         return (
-          <Text key={index} style={{ fontSize: 24 }}>
+          <Text key={index} style={{ fontSize: 18 }}>
             {renderChildren()}
           </Text>
         );
