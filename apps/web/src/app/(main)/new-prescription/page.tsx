@@ -1,9 +1,9 @@
-import AddMedicine from "@/components/AddMedicine";
+import AddMedicine from "@/components/med-list/AddMedicine";
 import ClearListButton from "@/components/med-list/ClearListButton";
 import PreviewButton from "@/components/med-list/PreviewButton";
-import MedicineList from "@/components/MedicineList";
-import PagePreview from "@/components/PagePreview";
-import SelectPageSize from "@/components/SelectPageSize";
+import MedicineList from "@/components/med-list/MedicineList";
+import PagePreview from "@/components/med-list/PagePreview";
+import SelectPageSize from "@/components/med-list/SelectPageSize";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
