@@ -16,7 +16,7 @@ export default function PagePreview({
   };
 
   return (
-    <div className="bg-background mx-auto border p-5" style={style}>
+    <div className="bg-background mx-auto border" style={style}>
       {children}
     </div>
   );
