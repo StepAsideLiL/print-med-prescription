@@ -20,7 +20,12 @@ export default function PreviewTemplate({
   const template = t.template[place];
 
   return (
-    <div style={{ padding: "40px 40px 20px 40px" }}>
+    <div
+      style={{
+        padding:
+          place === "header" ? "40px 40px 20px 40px" : "20px 40px 40px 40px",
+      }}
+    >
       <div className="flex items-center gap-1">
         {template.map((t, index) => (
           <div key={index} style={t.style} className="">
