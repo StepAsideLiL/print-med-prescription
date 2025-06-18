@@ -22,8 +22,8 @@ export default function PreviewTemplate({
   return (
     <div style={{ padding: "40px 40px 20px 40px" }}>
       <div className="flex items-center gap-1">
-        {template.map((t) => (
-          <div style={t.style} className="">
+        {template.map((t, index) => (
+          <div key={index} style={t.style} className="">
             {t.contentType === "text" && (
               <RichTextRenderer content={t.content as JSONContent} />
             )}
