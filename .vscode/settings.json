@@ -1,8 +1,4 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "tailwindCSS.classFunctions": ["cva", "cx"]
-  // "tailwindCSS.experimental.configFile": "../packages/design-system/src/styles/globals.css",
-  // "editor.quickSuggestions": {
-  //   "strings": true
-  // }
 }
