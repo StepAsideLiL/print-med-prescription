@@ -68,3 +68,9 @@ export type TTemplate = {
   active: boolean;
   template: TTemplateSection;
 };
+
+export type TPatientInfo = {
+  name: string;
+  age: number;
+  date: string;
+};

@@ -1,11 +1,6 @@
 import { date } from "@workspace/design-system/lib/date";
 import { atom, useAtom } from "jotai";
-
-type TPatientInfo = {
-  name: string;
-  age: number;
-  date: string;
-};
+import { TPatientInfo } from "@/lib/types";
 
 const patientInfoAtom = atom<TPatientInfo>({
   name: "",
