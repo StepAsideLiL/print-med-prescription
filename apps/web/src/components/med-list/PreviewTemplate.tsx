@@ -51,8 +51,6 @@ function RichTextRenderer({ content }: { content: JSONContent }) {
     text: string,
     marks?: JSONContent["marks"]
   ): React.ReactNode => {
-    console.log(text, marks);
-
     if (!marks || marks.length === 0) return text;
 
     return marks.reduceRight<React.ReactNode>((inner, mark) => {
@@ -95,8 +93,6 @@ function RichTextRenderer({ content }: { content: JSONContent }) {
    * Render an individual node according to its `type`.
    */
   const renderNode = (node: JSONContent, index: number): React.ReactNode => {
-    console.log(index, node, node.attrs);
-
     const renderChildren = () => {
       return node.content?.map((child, i) => renderNode(child, i));
     };
