@@ -3,6 +3,7 @@
 import {
   TImageContent,
   TMedListSchema,
+  TPatientInfo,
   TTemplate,
   TTemplateSectionSchema,
 } from "@/lib/types";
@@ -15,6 +16,7 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import MedTable from "./MedTable";
 
 const styles = StyleSheet.create({
   page: {
@@ -34,37 +36,134 @@ const styles = StyleSheet.create({
 export default function PdfDoc({
   medList,
   template,
+  patientInfo,
 }: {
   medList: TMedListSchema[];
   template: TTemplate;
+  patientInfo: TPatientInfo[];
 }) {
+  const patientName = patientInfo[0]?.name;
+  const patientAge = patientInfo[0]?.age;
+  const date = patientInfo[0]?.date.replaceAll("-", " / ");
+  const durationUnitTitle = {
+    day: "Day",
+    week: "Week",
+    month: "Month",
+  };
+
   return (
     <Document pageLayout="twoColumnLeft">
       <Page size="A4" style={styles.page}>
         {template.template.header.length !== 0 && (
-          <Header headerTemplate={template.template.header} />
+          <RenderTemplate template={template.template.header} place="header" />
         )}
 
-        <View style={styles.section}>
-          {medList.map((med) => (
-            <View key={med.id}>
-              <Text style={styles.medText}>{med.medicineName}</Text>
-            </View>
-          ))}
+        <View
+          style={{
+            border: "1px solid black",
+            borderLeft: "none",
+            borderRight: "none",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: "20px",
+            fontSize: "12px",
+            height: "20px",
+          }}
+        >
+          <View>
+            <Text>Name: {patientName}</Text>
+          </View>
+          <View>
+            <Text>Age: {patientAge}</Text>
+          </View>
+          <View>
+            <Text>Date: {date}</Text>
+          </View>
+        </View>
+
+        <View style={{ flexGrow: 1, padding: "10px" }}>
+          <MedTable.MedTableContiner
+            viewProps={{ style: { padding: "10px 0" } }}
+          >
+            <MedTable.MedTableHeaderRow>
+              <MedTable.MedTableHeaderRowCell>
+                Med Type
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Med Name
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Day
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Noon
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Night
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Before / After Meal
+              </MedTable.MedTableHeaderRowCell>
+
+              <MedTable.MedTableHeaderRowCell>
+                Duration
+              </MedTable.MedTableHeaderRowCell>
+            </MedTable.MedTableHeaderRow>
+            {medList.map((med) => (
+              <MedTable.MedTableRow key={med.id}>
+                <MedTable.MedTableCell>
+                  {med.type === "tablet" ? "Tablet" : "Syrup"}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.medicineName}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.morning ? "Yes" : "No"}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.noon ? "Yes" : "No"}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.night ? "Yes" : "No"}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.afterMeal ? "After" : "Before"}
+                </MedTable.MedTableCell>
+
+                <MedTable.MedTableCell>
+                  {med.duration.lenght} {durationUnitTitle[med.duration.unit]}
+                </MedTable.MedTableCell>
+              </MedTable.MedTableRow>
+            ))}
+          </MedTable.MedTableContiner>
         </View>
 
         {template.template.footer.length !== 0 && (
-          <Footer footerTemplate={template.template.footer} />
+          <RenderTemplate template={template.template.footer} place="footer" />
         )}
       </Page>
     </Document>
   );
 }
 
-function Header({
-  headerTemplate,
+function RenderTemplate({
+  template,
+  place,
 }: {
-  headerTemplate: TTemplateSectionSchema[];
+  template: TTemplateSectionSchema[];
+  place: "header" | "footer";
 }) {
   return (
     <View
@@ -72,19 +171,21 @@ function Header({
         display: "flex",
         flexDirection: "row",
         gap: 4,
+        padding:
+          place === "header" ? "20px 20px 10px 20px" : "10px 20px 20px 20px",
+        borderTop: place === "footer" ? "1px solid black" : "none",
       }}
     >
-      {headerTemplate.map((template) => (
+      {template.map((template) => (
         <View
           key={template.id}
           style={{
             width: template.style.width,
             height: "100px",
-            border: "1px solid black",
           }}
         >
           {template.contentType === "text" && template.content !== null && (
-            <RenderText content={template.content as JSONContent} />
+            <RichTextRenderer content={template.content as JSONContent} />
           )}
 
           {template.contentType === "img" && template.content !== null && (
@@ -96,42 +197,7 @@ function Header({
   );
 }
 
-function Footer({
-  footerTemplate,
-}: {
-  footerTemplate: TTemplateSectionSchema[];
-}) {
-  return (
-    <View
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        gap: 4,
-      }}
-    >
-      {footerTemplate.map((template) => (
-        <View
-          key={template.id}
-          style={{
-            width: template.style.width,
-            height: "100px",
-            border: "1px solid black",
-          }}
-        >
-          {template.contentType === "text" && template.content !== null && (
-            <RenderText content={template.content as JSONContent} />
-          )}
-
-          {template.contentType === "img" && template.content !== null && (
-            <RenderImage content={template.content as TImageContent} />
-          )}
-        </View>
-      ))}
-    </View>
-  );
-}
-
-function RenderText({ content }: { content: JSONContent }) {
+function RichTextRenderer({ content }: { content: JSONContent }) {
   /**
    * Recursively wrap plain text with mark components (bold, italic, link, …).
    */
@@ -145,13 +211,23 @@ function RenderText({ content }: { content: JSONContent }) {
       switch (mark.type) {
         case "bold":
           return (
-            <Text key={mark.type} style={{ fontWeight: "700" }}>
+            <Text
+              key={mark.type}
+              style={{
+                fontWeight: "600",
+              }}
+            >
               {inner}
             </Text>
           );
         case "italic":
           return (
-            <Text key={mark.type} style={{ fontStyle: "italic" }}>
+            <Text
+              key={mark.type}
+              style={{
+                fontStyle: "italic",
+              }}
+            >
               {inner}
             </Text>
           );
@@ -162,7 +238,7 @@ function RenderText({ content }: { content: JSONContent }) {
             </Text>
           );
         default:
-          return <Text key={mark.type}>{inner}</Text>; // Unknown mark → render inner contents unchanged
+          return inner; // Unknown mark → render inner contents unchanged
       }
     }, text);
   };
@@ -171,20 +247,34 @@ function RenderText({ content }: { content: JSONContent }) {
    * Render an individual node according to its `type`.
    */
   const renderNode = (node: JSONContent, index: number): React.ReactNode => {
-    const renderChildren = () =>
-      node.content?.map((child, i) => renderNode(child, i));
+    const renderChildren = () => {
+      return node.content?.map((child, i) => renderNode(child, i));
+    };
 
     switch (node.type) {
       case "paragraph":
         return (
-          <Text key={index} style={{ fontSize: 12 }}>
+          <Text
+            key={index}
+            style={{
+              fontSize: "12px",
+              textAlign: node.attrs?.textAlign ? node.attrs.textAlign : "left",
+            }}
+          >
             {renderChildren()}
           </Text>
         );
 
       case "heading": {
         return (
-          <Text key={index} style={{ fontSize: 18 }}>
+          <Text
+            key={index}
+            style={{
+              textAlign: node.attrs?.textAlign ? node.attrs.textAlign : "left",
+              fontWeight: "normal",
+              fontSize: "20px",
+            }}
+          >
             {renderChildren()}
           </Text>
         );
@@ -208,8 +298,7 @@ function RenderText({ content }: { content: JSONContent }) {
       ? content.map((node, i) => renderNode(node, i))
       : renderNode(content, 0);
 
-  // Using `prose` gives you nice defaults if you have the Tailwind Typography plugin installed.
-  return <View style={{}}>{renderContent(content)}</View>;
+  return <View style={{ height: "100px" }}>{renderContent(content)}</View>;
 }
 
 function RenderImage({ content }: { content: TImageContent }) {
@@ -235,17 +324,29 @@ function RenderImage({ content }: { content: TImageContent }) {
   return (
     <View
       style={{
-        width: "100px",
-        height: "100px",
-        overflow: "hidden",
-        marginHorizontal: "auto",
-        borderRadius: "1000",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent:
+          !content.style?.align || content.style.align === "left"
+            ? "flex-start"
+            : content?.style?.align === "center"
+              ? "center"
+              : "flex-end",
       }}
     >
-      <Image
-        src={content.buffer}
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
+      <View
+        style={{
+          width: "100px",
+          height: "100px",
+          overflow: "hidden",
+          borderRadius: "1000",
+        }}
+      >
+        <Image
+          src={content.buffer}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      </View>
     </View>
   );
 }

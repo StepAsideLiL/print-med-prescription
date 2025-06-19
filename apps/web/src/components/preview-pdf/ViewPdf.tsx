@@ -7,9 +7,16 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 export default function ViewPdf() {
   const template = useLiveQuery(() => db.getActiveTemplate());
+  const patientInfo = useLiveQuery(() => db.getPatientInfo());
   const medList = useLiveQuery(() => db.getMedList());
 
-  if (medList === undefined || medList.length === 0) {
+  console.log(patientInfo);
+
+  if (patientInfo === undefined || patientInfo.length === 0) {
+    return null;
+  }
+
+  if (medList === undefined) {
     return null;
   }
 
@@ -19,7 +26,7 @@ export default function ViewPdf() {
 
   return (
     <PDFViewer className="h-screen w-full" showToolbar={true}>
-      <PdfDoc medList={medList} template={template} />
+      <PdfDoc medList={medList} template={template} patientInfo={patientInfo} />
     </PDFViewer>
   );
 }
