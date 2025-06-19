@@ -31,7 +31,7 @@ export default function Page() {
 
           <PatientInfo />
 
-          <div className="flex-1">
+          <div className="flex-1 py-5">
             <MedicineList />
             <AddMedicine />
           </div>
