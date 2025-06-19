@@ -41,17 +41,21 @@ export default function PrescriptionTemplate({
         <SaveTemplateButton template={template} />
       </div>
 
-      <div className="bg-background h-[1360px] w-[1000px]">
-        <div className="flex h-full flex-col">
-          <div className="flex-none px-10 pb-5 pt-10">
+      <div className="bg-background w-[1000px]">
+        <div className="flex flex-col">
+          <div className="flex-none px-10 pt-10 pb-5">
             <TemplateSection place="header" />
           </div>
 
-          <div className="border-foreground/50 border-y">Name</div>
+          <div className="border-foreground/50 text-muted-foreground border-y text-center">
+            <h1 className="tracking-[10px]">Patient Information</h1>
+          </div>
 
-          <div className="grow">Body</div>
+          <div className="text-muted-foreground grow py-15 text-center">
+            <h1 className="tracking-[18px]">Medicine List</h1>
+          </div>
 
-          <div className="border-foreground/50 flex-none border-t px-10 pb-10 pt-5">
+          <div className="border-foreground/50 flex-none border-t px-10 pt-5 pb-10">
             <TemplateSection place="footer" />
           </div>
         </div>
