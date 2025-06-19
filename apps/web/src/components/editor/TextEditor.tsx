@@ -126,7 +126,7 @@ export default function TextEditor({
               <Icons.Paragraph />
             </Button>
 
-            <Separator orientation="vertical" className="bg-border" />
+            <Separator orientation="vertical" className="bg-foreground/30" />
 
             <Button
               variant={editor.isActive("bold") ? "default" : "outline"}
@@ -161,7 +161,7 @@ export default function TextEditor({
               <Icons.Underline />
             </Button>
 
-            <Separator orientation="vertical" className="bg-border" />
+            <Separator orientation="vertical" className="bg-foreground/30" />
 
             <Button
               variant={
@@ -231,7 +231,7 @@ export default function TextEditor({
               <Icons.AlignJustify />
             </Button>
 
-            <Separator orientation="vertical" className="bg-border" />
+            <Separator orientation="vertical" className="bg-foreground/30" />
 
             <Button
               variant={"outline"}

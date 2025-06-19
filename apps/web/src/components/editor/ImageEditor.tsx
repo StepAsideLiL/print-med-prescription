@@ -41,7 +41,7 @@ export default function ImageEditor({
     >
       {get === section.id && (
         <div className="bg-muted absolute -top-14 w-fit rounded border">
-          <div className="flex items-center gap-1 p-1">
+          <div className="flex h-10 items-center gap-1 p-1">
             <Button
               variant={
                 section.content?.style?.align === "left" ? "default" : "outline"
@@ -121,7 +121,7 @@ export default function ImageEditor({
               <Icons.AlignRight />
             </Button>
 
-            <Separator orientation="vertical" className="bg-border" />
+            <Separator orientation="vertical" className="bg-foreground/30" />
 
             <Button
               variant={"outline"}
