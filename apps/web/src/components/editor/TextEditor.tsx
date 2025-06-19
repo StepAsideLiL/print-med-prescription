@@ -243,20 +243,6 @@ export default function TextEditor({
             >
               <Icons.Delete className="text-destructive" />
             </Button>
-
-            {/* <Button
-              variant={"outline"}
-              size={"sm"}
-              className="cursor-pointer"
-              onClick={() => {
-                updateSectionContent({
-                  place,
-                  section: { ...section, content: editor.getJSON() },
-                });
-              }}
-            >
-              Save
-            </Button> */}
           </div>
         </div>
       )}
