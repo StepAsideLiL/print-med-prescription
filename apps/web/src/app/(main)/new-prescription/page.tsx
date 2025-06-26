@@ -7,6 +7,7 @@ import SelectPageSize from "@/components/med-list/SelectPageSize";
 import { Metadata } from "next";
 import PreviewTemplate from "@/components/med-list/PreviewTemplate";
 import PatientInfo from "@/components/med-list/PatientInfo";
+import EditActiveTemplate from "@/components/med-list/EditActiveTemplate";
 
 export const metadata: Metadata = {
   title: "Write A New Prescription",
@@ -19,6 +20,8 @@ export default function Page() {
         <SelectPageSize />
 
         <div className="flex items-center gap-2">
+          <EditActiveTemplate />
+
           <ClearListButton />
 
           <PreviewButton />
