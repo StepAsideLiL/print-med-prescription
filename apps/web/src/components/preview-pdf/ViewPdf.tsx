@@ -6,7 +6,7 @@ import db from "@/lib/db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 export default function ViewPdf() {
-  const template = useLiveQuery(() => db.getActiveTemplate());
+  let template = useLiveQuery(() => db.getActiveTemplate());
   const patientInfo = useLiveQuery(() => db.getPatientInfo());
   const medList = useLiveQuery(() => db.getMedList());
 
@@ -19,7 +19,46 @@ export default function ViewPdf() {
   }
 
   if (template === undefined) {
-    return null;
+    template = {
+      id: "id",
+      name: "name",
+      active: true,
+      template: {
+        header: [
+          {
+            id: "h0loy",
+            style: {
+              width: "100%",
+            },
+            contentType: "text",
+            content: {
+              type: "doc",
+              content: [
+                {
+                  type: "heading",
+                  attrs: {
+                    textAlign: "left",
+                    level: 1,
+                  },
+                  content: [
+                    {
+                      type: "text",
+                      marks: [
+                        {
+                          type: "bold",
+                        },
+                      ],
+                      text: "Medicine Prescription",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+        footer: [],
+      },
+    };
   }
 
   return (

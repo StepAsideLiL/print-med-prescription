@@ -14,6 +14,45 @@ export default function PreviewTemplate({
   const t = useLiveQuery(() => db.getActiveTemplate());
 
   if (t === undefined) {
+    if (place === "header") {
+      return (
+        <div
+          style={{
+            padding:
+              place === "header"
+                ? "40px 40px 20px 40px"
+                : "20px 40px 40px 40px",
+          }}
+        >
+          <RichTextRenderer
+            content={{
+              type: "doc",
+              content: [
+                {
+                  type: "heading",
+                  attrs: {
+                    textAlign: "left",
+                    level: 1,
+                  },
+                  content: [
+                    {
+                      type: "text",
+                      marks: [
+                        {
+                          type: "bold",
+                        },
+                      ],
+                      text: "Medicine Prescription",
+                    },
+                  ],
+                },
+              ],
+            }}
+          />
+        </div>
+      );
+    }
+
     return null;
   }
 
