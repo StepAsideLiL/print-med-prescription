@@ -1,6 +1,7 @@
 import { Button } from "@workspace/design-system/ui/button";
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -11,7 +12,7 @@ export default function Page() {
     <main className="mx-auto w-full max-w-5xl space-y-2 px-5 py-5 md:px-0">
       <div className="flex w-full items-center justify-between">
         <div className="w-full space-y-2">
-          <h1 className="text-balance text-5xl font-semibold">
+          <h1 className="text-5xl font-semibold text-balance">
             Print Medicine Prescription
           </h1>
 
@@ -21,9 +22,11 @@ export default function Page() {
           </p>
 
           <div className="flex items-center gap-2">
-            <Button className="cursor-pointer">New Prescription</Button>
-            <Button variant={"outline"} className="cursor-pointer">
-              Templates
+            <Button className="cursor-pointer" asChild>
+              <Link href={"/new-prescription"}>New Prescription</Link>
+            </Button>
+            <Button variant={"outline"} className="cursor-pointer" asChild>
+              <Link href={"templates"}>Templates</Link>
             </Button>
           </div>
         </div>
