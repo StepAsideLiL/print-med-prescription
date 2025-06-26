@@ -10,8 +10,6 @@ export default function ViewPdf() {
   const patientInfo = useLiveQuery(() => db.getPatientInfo());
   const medList = useLiveQuery(() => db.getMedList());
 
-  console.log(patientInfo);
-
   if (patientInfo === undefined || patientInfo.length === 0) {
     return null;
   }
