@@ -1,3 +1,4 @@
+import Main from "@/components/pdf-template/Main";
 import PrescriptionTemplate from "@/components/pdf-template/PrescriptionTemplate";
 import { Metadata } from "next";
 
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="flex w-full items-start">
+    <Main className="flex w-full items-start">
       <PrescriptionTemplate />
-    </main>
+    </Main>
   );
 }
