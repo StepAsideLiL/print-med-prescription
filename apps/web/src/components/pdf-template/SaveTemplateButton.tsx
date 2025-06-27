@@ -1,12 +1,13 @@
 "use client";
 
 import db from "@/lib/db";
+import { nanoId } from "@/lib/nanoid";
 import { store } from "@/lib/store";
 import { TTemplate } from "@/lib/types";
 import { toast } from "@workspace/design-system/lib/toast";
 import { Button } from "@workspace/design-system/ui/button";
 import { Input } from "@workspace/design-system/ui/input";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 export default function SaveTemplateButton({
@@ -15,8 +16,10 @@ export default function SaveTemplateButton({
   template: TTemplate;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { get } = store.TemplateSection();
   const [templateName, setTemplateName] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     setTemplateName(template.name);
@@ -34,7 +37,9 @@ export default function SaveTemplateButton({
       <Button
         variant={"outline"}
         className="cursor-pointer"
+        disabled={loading}
         onClick={async () => {
+          setLoading(true);
           if (templateName === "") {
             toast.error("Template name is empty.");
             return;
@@ -46,13 +51,16 @@ export default function SaveTemplateButton({
           }
 
           if (pathname === "/create-template") {
+            const templateId = nanoId.templateId();
             await db
-              .createNewTemplate(templateName, get)
+              .createNewTemplate(templateId, templateName, get)
               .then(() => {
                 toast.success("Template created successfully.");
+                router.push(`/edit-template/${templateId}`);
               })
               .catch(() => {
                 toast.error("Template failed to create.");
+                setLoading(false);
               });
           }
 
@@ -61,9 +69,11 @@ export default function SaveTemplateButton({
               .updateTemplate(template.id, get)
               .then(() => {
                 toast.success("Template updated successfully.");
+                setLoading(false);
               })
               .catch(() => {
                 toast.error("Template failed to update.");
+                setLoading(false);
               });
           }
         }}

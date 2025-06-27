@@ -46,11 +46,12 @@ export default {
     return templates.find((t) => t.active === true);
   },
   createNewTemplate: async (
+    templateId: string,
     templateName: string = "New Template",
     template: TTemplateSection
   ) => {
     await localDB.template.add({
-      id: nanoId.templateId(),
+      id: templateId,
       active: false,
       name: templateName,
       template,
